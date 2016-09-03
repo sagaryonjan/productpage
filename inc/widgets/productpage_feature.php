@@ -56,6 +56,21 @@ class Productpage_Featured extends WP_Widget
 
             <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>"/>
         </p>
+
+        <p>
+            <label for="<?php echo $this->get_field_id($image_url); ?>"> <?php _e('Advertisement Image ', 'productpage'); ?></label>
+
+            <?php
+            if ($instance[$image_url] != '') :
+                echo '<img id="' . $this->get_field_id($instance[$image_url] . 'preview') . '"src="' . $instance[$image_url] . '"style="max-width:250px;" /><br />';
+            endif;
+            ?>
+
+            <input type="text" class="widefat custom_media_url" id="<?php echo $this->get_field_id($image_url); ?>" name="<?php echo $this->get_field_name($image_url); ?>" value="<?php echo $instance[$image_url]; ?>" style="margin-top:5px;"/>
+
+            <input type="button" class="button button-primary custom_media_button" id="custom_media_button" name="<?php echo $this->get_field_name($image_url); ?>" value="<?php _e('Upload Image', 'productpage'); ?>" style="margin-top:5px; margin-right: 30px;" onclick="imageWidget.uploader( '<?php echo $this->get_field_id($image_url); ?>' ); return false;"/>
+        </p>
+
         <p>
             <label for="<?php echo $this->get_field_id('description'); ?>"><?php _e('Description', 'productpage'); ?></label>
 
@@ -66,18 +81,8 @@ class Productpage_Featured extends WP_Widget
 
             <input id="<?php echo $this->get_field_id( 'description_limit' ); ?>" class="widefat" name="<?php echo $this->get_field_name( 'description_limit' ); ?>" type="number" value="<?php echo $description_limit; ?>" size="3" />
         </p>
-        <p>
-              <label for="<?php echo $this->get_field_id($image_url); ?>"> <?php esc_html_e( 'Image ', 'productpage' ); ?> </label> <br />
-             <div class="media-uploader" id="<?php echo $this->get_field_id($image_url); ?>">
-                <div class="custom_media_preview">
-                   <?php if ( $instance[$image_url] != '') : ?>
-                      <img class="custom_media_preview_default" src="<?php echo $instance[$image_url]; ?>" style="max-width:100%;" />
-                   <?php endif; ?>
-                </div>
-                <input type="text" class="widefat custom_media_input" id="<?php echo $this->get_field_id($image_url); ?>" name="<?php echo $this->get_field_name($image_url); ?>" value="<?php echo $instance[$image_url]; ?>" style="margin-top:5px;" />
-                <button class="custom_media_upload button button-secondary button-large" id="<?php echo $this->get_field_id($image_url); ?>" data-choose="<?php esc_attr_e( 'Choose an image', 'productpage' ); ?>" data-update="<?php esc_attr_e( 'Use image', 'productpage' ); ?>" style="width:100%;margin-top:6px;margin-right:30px;"><?php esc_html_e( 'Select an Image', 'productpage' ); ?></button>
-             </div>
-        </p>
+
+
 
         <?php for ($i=0; $i<5; $i++) : ?>
         <p>
@@ -182,8 +187,16 @@ class Productpage_Featured extends WP_Widget
 
                 </div>
 
+
                 <div class="featured-image">
-                    <img src="images/p2.png"/>
+                    <?php
+                    $output = '';
+                    if (!empty($image_url)) {
+
+                        $output .= '<img src="' . $image_url . '" >';
+                    }
+                    echo $output;
+                    ?>
                 </div>
             </div>
         </div>

@@ -5,22 +5,22 @@
  * @subpackage ProductPage
  */
 
+//productpage header funtion
+get_header();
 
-?>
+//productpage front banner funtion
+productpage_front_banner();
 
-<?php  get_header(); ?>
-
-<?php  productpage_front_banner(); ?>
-
-
-
-<?php
+//productpage front page
 if (is_active_sidebar('productpage_front_page')) {
 
     if (!dynamic_sidebar('productpage_front_page')):
     endif;
 
 }
+
+
+
 ?>
 
 
@@ -40,7 +40,7 @@ if (is_active_sidebar('productpage_front_page')) {
         </div>
     </div> -->
 
-    <!-- <div class="ts-info">
+     <div class="ts-info">
         <div class="ts-container">
             <figure class="ts-info-img ts-left">
                 <img src="images/p1.png">
@@ -83,7 +83,7 @@ if (is_active_sidebar('productpage_front_page')) {
                 <img src="images/p1.png">
             </figure>
         </div>
-    </div> -->
+    </div>
 
      
 

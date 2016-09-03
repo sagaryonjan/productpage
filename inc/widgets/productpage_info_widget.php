@@ -24,34 +24,59 @@ class Productpage_info_widget extends WP_Widget
     {
         $widget_ops = array(
             'classname'      => 'productpage_info_widget',
-            'description'    => esc_html__('Product info widget.', 'productpage'));
+            'description'    => esc_html__( ' Product Info ', 'productpage'));
 
-        parent::__construct( 'productpage_info_widget', '&nbsp;' . __('Info Widget ', 'productpage'), $widget_ops);
+        parent::__construct( 'productpage_info_widget', '&nbsp;' . __('Product Info ', 'productpage'), $widget_ops);
     }// end of construct.
 
     function form($instance)
     {
-        $defaults['title']        =  '';
-        $defaults['description']  =  '';
-        $defaults['style']        =  'style1';
 
-        $instance                 =  wp_parse_args((array)$instance, $defaults);
+        $defaults['style']             =  'style1';
+        $defaults['page']              =  '';
+        $defaults['image_url']         =  '';
+        $defaults['background_color']  = '#222222';
 
-        $title                    =  esc_attr($instance['title']);
-        $text                     =  esc_attr($instance['text']);
-        $style                    =  $instance['style'];
+        $instance                      =  wp_parse_args((array)$instance, $defaults);
+
+
+        $style                         =  $instance['style'];
+        $image_url                     =  'image_url';
+        $background_color              =  $instance['background_color'];
 
         ?>
 
+        <label><?php _e('Lorem ipsm is the best text i have ever wrote man', 'productpage'); ?></label>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'productpage'); ?></label>
+            <label for="<?php echo $this->get_field_id( 'background_color' ); ?>" class="widefat"><?php _e('Background Color', 'productpage') ?></label><br></br>
 
-            <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>"/>
+            <input class="widefat my-color-picker" id="<?php echo $this->get_field_id( 'background_color' ); ?>" name="<?php echo $this->get_field_name( 'background_color' ); ?>" value="<?php echo $background_color; ?>" type="text" />
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('description'); ?>"><?php _e('Description', 'productpage'); ?></label>
+            <label for="<?php echo $this->get_field_id($image_url); ?>"> <?php _e('Background Image ', 'productpage'); ?></label>
 
-            <textarea class="widefat" rows="10" cols="20" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>"><?php echo esc_textarea( $text ); ?></textarea>
+            <?php
+            if ($instance[$image_url] != '') :
+                echo '<img id="' . $this->get_field_id($instance[$image_url] . 'preview') . '"src="' . $instance[$image_url] . '"style="max-width:250px;" /><br />';
+            endif;
+            ?>
+
+            <input type="text" class="widefat custom_media_url" id="<?php echo $this->get_field_id($image_url); ?>" name="<?php echo $this->get_field_name($image_url); ?>" value="<?php echo $instance[$image_url]; ?>" style="margin-top:5px;"/>
+
+            <input type="button" class="button button-primary custom_media_button widefat" id="custom_media_button" name="<?php echo $this->get_field_name($image_url); ?>" value="<?php _e('Upload Image', 'productpage'); ?>" style="margin-top:5px; margin-right: 30px;" onclick="imageWidget.uploader( '<?php echo $this->get_field_id($image_url); ?>' ); return false;"/>
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id( 'page' ); ?>"><?php esc_html_e( 'Page', 'productpage' ); ?>:</label>
+            <?php
+            $arg = array(
+                'class' => 'widefat',
+                'show_option_none' =>' ',
+                'name' => $this->get_field_name('page'),
+                'id'   => $this->get_field_id('page'),
+                'selected' => absint( $instance['page'] )
+            );
+            wp_dropdown_pages( $arg );
+            ?>
         </p>
         <p>
             <input type="radio" <?php checked($style, 'style1') ?> id="<?php echo $this->get_field_id('style'); ?>" name="<?php echo $this->get_field_name('style'); ?>" value="style1"/><?php _e('Style 1', 'productpage'); ?><br/>
@@ -65,13 +90,13 @@ class Productpage_info_widget extends WP_Widget
     function update($new_instance, $old_instance)
     {
         $instance = $old_instance;
-        $instance['title']     =  sanitize_text_field($new_instance['title']);
-        $instance['style']    = $new_instance['style'];
+        $instance['style']             =  $new_instance['style'];
+        $image_url                     =  'image_url';
+        $instance[$image_url]          =  esc_url_raw($new_instance[$image_url]);
+        $instance['background_color']  =  $new_instance['background_color'];
+        $instance['page']              =  absint( $new_instance['page'] );
 
-        if ( current_user_can('unfiltered_html') )
-            $instance[ 'text' ]     =  $new_instance[ 'text' ];
-        else
-            $instance[ 'text' ]     = stripslashes( wp_filter_post_kses( addslashes( $new_instance[ 'text' ] ) ) );
+
 
         return $instance;
     }// end of update.
@@ -101,7 +126,21 @@ class Productpage_info_widget extends WP_Widget
 
 
 
-
+        <div class="ts-info ts-info2">
+            <div class="ts-container">
+                <div class="ts-info-desc">
+                    <div class="ts-title">
+                        <h2>Info Title 1</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididuEst meis intellegat dissentiet ad, nec ei mundi semper graecis, sea nostro minimum maiestatis cu. Ius cu veniam aperiam mnesarchum, aliquid argumentum sit at. Mei an harum tacimates, pro no fugit essent mandamus. Esse erat suscipiantur vis at. Detracto efficiantur signiferumque ea vix, alia erant ad vim. His diam sapientem no, has nonumy populo cu.Est meis intellegat dissentiet ad, nec ei mundi semper graecis, sea nostro minimum maiestatis cu.nt ut labore et dolsectetur adipisicing elit,ore magna aliqua.</p>
+                    </div>
+                    <a href="#">Learn More</a>
+                </div>
+                <figure class="ts-info-img">
+                    <img src="images/p1.png">
+                </figure>
+            </div>
+        </div>
 
 
 

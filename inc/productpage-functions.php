@@ -144,9 +144,7 @@ if (!function_exists('productpage_excerpt')) :
         $productpage_striped_content = strip_tags($productpage_striped_content);
         $productpage_excerpt = mb_substr($productpage_striped_content, 0, $productpage_letter_count);
 
-        if (strlen($productpage_striped_content) > strlen($productpage_excerpt)) {
-            $productpage_excerpt .= "...";
-        }
+
 
         return $productpage_excerpt;
 

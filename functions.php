@@ -135,14 +135,20 @@ function productpage_admin_scripts( $hook ) {
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );
 
+		wp_enqueue_style( 'productpage-admin-css', get_template_directory_uri() . '/css/productpage-admin.css', false, '1.0.0' );
+
+		//image upload script
+		wp_enqueue_media();
 		wp_enqueue_script( 'productpage-image-uploader', get_template_directory_uri() . '/js/image-uploader.js', array( 'jquery' ), '1.0.0', true );
 
-		//wp_enqueue_style( 'productpage-admin-css', get_template_directory_uri() . '/css/admin/productpage-admin.css', false, '1.0.0' );
+		wp_enqueue_script( 'productpage-color-picker', get_template_directory_uri() . '/js/color-picker.js', array( 'jquery' ), '1.0.0', true );
 
-		//wp_enqueue_script( 'productpage-admin-scripts', get_template_directory_uri() . '/js/admin/productpage-admin.js', array( 'jquery' ), '1.0.0', true );
+
+
 	}
 }
 add_action('admin_enqueue_scripts', 'productpage_admin_scripts');
+
 
 
 /**
