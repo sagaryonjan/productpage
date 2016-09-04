@@ -26,7 +26,7 @@ class Productpage_info_widget extends WP_Widget
             'classname'      => 'productpage_info_widget',
             'description'    => esc_html__( ' Product Info ', 'productpage'));
 
-        parent::__construct( 'productpage_info_widget', '&nbsp;' . __('Product Info ', 'productpage'), $widget_ops);
+        parent::__construct( 'productpage_info_widget', '&nbsp;' . __('&spades; TS: Product Info ', 'productpage'), $widget_ops);
     }// end of construct.
 
     function form($instance)

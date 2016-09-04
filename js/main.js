@@ -64,6 +64,18 @@ jQuery(document).ready(function($){
         return false;
     });
 
+//Accordian
+    jQuery(function() {
+      $('.faqs-block h4').on('click',function() {
+        $('.faqs-block p').slideUp('normal');
+        $(this).next('.faqs-block p').slideDown('normal'); 
+        $(this).find('.faqs-block p').addClass('active');
+        $(this).find('.faqs-block p').removeClass('active'); 
+        $(this).find('.faqs-block h4').addClass('active');
+        $(this).find('.faqs-block h4').removeClass('active'); 
+      });
+    });
+
 
 // ScrollSpeed
 //jQuery.scrollSpeed(120, 800);

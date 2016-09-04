@@ -26,7 +26,7 @@ class Productpage_Featured extends WP_Widget
             'classname'      => 'productpage_featured',
             'description'    => esc_html__('Display latest posts or posts of specific category.', 'productpage'));
 
-        parent::__construct( 'productpage_featured', '&nbsp;' . __('&copy; Our Feature ', 'productpage'), $widget_ops);
+        parent::__construct( 'productpage_featured', '&nbsp;' . __('&spades; TS: Our Feature ', 'productpage'), $widget_ops);
     }// end of construct.
 
     function form($instance)

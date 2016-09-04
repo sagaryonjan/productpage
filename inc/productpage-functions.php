@@ -64,7 +64,7 @@ if (!function_exists('productpage_front_banner')) :
 
     <div class="ts-slider">
 
-        <div data-stellar-background-ratio="0.5" class="ts-parallax-image" style="background-image: url(<?php echo esc_url(get_theme_mod('productpage_product_banner')); ?>);  background-size:cover; background-position: center center;">
+        <div data-stellar-background-ratio="0.5" class="ts-parallax-image" style="background-image: url(<?php echo esc_url(get_theme_mod('productpage_product_banner')); ?>); background-size:cover; background-repeat: no-repeat;">
             <div class="ts-container">
                 <div class="ts-desc">
                     <div class="ts-content">

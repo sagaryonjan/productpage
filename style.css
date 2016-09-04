@@ -1775,6 +1775,31 @@ figure.ts-review-img {
     text-align: center;
 } 
 
+.faqs-block h4 {
+    padding: 14px; 
+    font-size: 14px;
+    margin: 8px 0 0;
+    cursor: pointer;
+    color: #fff;
+	background: #FF9B42;
+}
+
+.faqs-list .faqs-block p {
+	display: none;
+	padding: 14px;
+	font-size: 14px;
+    background: #222;
+    max-width: 100%;
+    text-align: left;
+    line-height: 28px;
+	color: #fff;
+	font-family: 'lato', sans-serif;
+}
+
+.faqs-block p.active {
+	display: block;
+}
+
 
 /*=====  End of ts faqs  ======*/
 
