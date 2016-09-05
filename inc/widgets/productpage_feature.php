@@ -33,7 +33,7 @@ class Productpage_Featured extends WP_Widget
     {
         $defaults['title']          =  '';
         $defaults['description']    =  '';
-        $defaults['description_limit']    =  '';
+        $defaults['description_limit']    =  50;
         $defaults['image_url']  =  '';
 
         for ($i=0; $i<5; $i++) {
@@ -43,7 +43,7 @@ class Productpage_Featured extends WP_Widget
         $instance                   =  wp_parse_args((array)$instance, $defaults);
 
         $title                      =  esc_attr($instance['title']);
-        $text                       =  esc_attr($instance['text']);
+        $text                       =  esc_attr($instance['description']);
         $description_limit          =  esc_attr($instance['description_limit']);
         $image_url                   =  'image_url';
 
@@ -86,7 +86,7 @@ class Productpage_Featured extends WP_Widget
 
         <?php for ($i=0; $i<5; $i++) : ?>
         <p>
-            <label for="<?php echo $this->get_field_id( 'page' ); ?>"><?php esc_html_e( 'Page', 'pageline' ); ?>:</label>
+            <label for="<?php echo $this->get_field_id( 'page' ); ?>"><?php esc_html_e( 'Page', 'productpage' ); ?>:</label>
             <?php
             $arg = array(
                 'class' => 'widefat',
@@ -173,13 +173,18 @@ class Productpage_Featured extends WP_Widget
                     <?php
                     if ( $get_featured_posts->have_posts() ) :
                     while ($get_featured_posts->have_posts()) : $get_featured_posts->the_post(); ?>
+
                     <div class="ts-features-single">
+
                         <div class="ts-icon">
                             <i class="fa fa-magic"></i>
                         </div>
-                        <h4><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h4>
+                        <h4> <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"> <?php the_title(); ?> </a> </h4>
+
                         <p><?php echo productpage_excerpt(get_the_content(), $desc_limit); ?></p>
+
                     </div>
+
                     <?php endwhile;
                         wp_reset_postdata();
                     endif;

@@ -32,10 +32,12 @@ class Productpage_info_widget extends WP_Widget
     function form($instance)
     {
 
-        $defaults['style']             =  'style1';
-        $defaults['page']              =  '';
-        $defaults['image_url']         =  '';
-        $defaults['background_color']  = '#222222';
+        $defaults['style']              =  'style1';
+        $defaults['page']               =  '';
+        $defaults['image_url']          =  '';
+        $defaults['background_color']   =  '#222222';
+        $defaults['description_limit']  =  400;
+        $defaults['button_text']        =  'Learn More';
 
         $instance                      =  wp_parse_args((array)$instance, $defaults);
 
@@ -43,10 +45,17 @@ class Productpage_info_widget extends WP_Widget
         $style                         =  $instance['style'];
         $image_url                     =  'image_url';
         $background_color              =  $instance['background_color'];
+        $description_limit             =  esc_attr($instance['description_limit']);
+        $button_text                   =  esc_attr($instance['button_text']);
 
         ?>
 
         <label><?php _e('Lorem ipsm is the best text i have ever wrote man', 'productpage'); ?></label>
+        <p>
+            <input type="radio" <?php checked($style, 'style1') ?> id="<?php echo $this->get_field_id('style'); ?>" name="<?php echo $this->get_field_name('style'); ?>" value="style1"/><?php _e('Style 1', 'productpage'); ?><br/>
+
+            <input type="radio" <?php checked($style, 'style2') ?> id="<?php echo $this->get_field_id('style'); ?>" name="<?php echo $this->get_field_name('style'); ?>" value="style2"/><?php _e('Style 2', 'productpage'); ?><br/>
+        </p>
         <p>
             <label for="<?php echo $this->get_field_id( 'background_color' ); ?>" class="widefat"><?php _e('Background Color', 'productpage') ?></label><br></br>
 
@@ -79,9 +88,15 @@ class Productpage_info_widget extends WP_Widget
             ?>
         </p>
         <p>
-            <input type="radio" <?php checked($style, 'style1') ?> id="<?php echo $this->get_field_id('style'); ?>" name="<?php echo $this->get_field_name('style'); ?>" value="style1"/><?php _e('Style 1', 'productpage'); ?><br/>
+            <label for="<?php echo $this->get_field_id( 'description_limit' ); ?>"><?php esc_html_e( 'Description Limit Number:', 'productpage' ); ?></label>
 
-            <input type="radio" <?php checked($style, 'style2') ?> id="<?php echo $this->get_field_id('style'); ?>" name="<?php echo $this->get_field_name('style'); ?>" value="style2"/><?php _e('Style 2', 'productpage'); ?><br/>
+            <input id="<?php echo $this->get_field_id( 'description_limit' ); ?>" class="widefat" name="<?php echo $this->get_field_name( 'description_limit' ); ?>" type="number" value="<?php echo $description_limit; ?>" size="3" />
+        </p>
+
+        <p>
+            <label for="<?php echo $this->get_field_id('button_text'); ?>"><?php _e('Edit Button Text:', 'productpage'); ?></label>
+
+            <input class="widefat" id="<?php echo $this->get_field_id('button_text'); ?>" name="<?php echo $this->get_field_name('button_text'); ?>" type="text" value="<?php echo $button_text; ?>"/>
         </p>
 
         <?php
@@ -95,8 +110,8 @@ class Productpage_info_widget extends WP_Widget
         $instance[$image_url]          =  esc_url_raw($new_instance[$image_url]);
         $instance['background_color']  =  $new_instance['background_color'];
         $instance['page']              =  absint( $new_instance['page'] );
-
-
+        $instance[ 'description_limit' ]     = absint( $new_instance[ 'description_limit' ] );
+        $instance['button_text']     =  sanitize_text_field($new_instance['button_text']);
 
         return $instance;
     }// end of update.
@@ -108,13 +123,16 @@ class Productpage_info_widget extends WP_Widget
 
         global $post;
 
-        $title    =  isset($instance['title']) ? $instance['title'] : '';
-        $text     =  isset($instance['text']) ? $instance['text'] : '';
+        $style    =  isset($instance['style']) ? $instance['style'] : '';
+        $image_url    =  isset($instance['image_url']) ? $instance['image_url'] : '';
+        $background_color     =  isset($instance['background_color']) ? $instance['background_color'] : '';
+        $desc_limit     =  isset($instance['description_limit']) ? $instance['description_limit'] : '';
         $page =  isset($instance['page']) ? $instance['page'] : '';
+        $button_text    =  isset($instance['button_text']) ? $instance['button_text'] : '';
 
         $get_featured_posts = new WP_Query(array(
             'posts_per_page'      => 5,
-            'post_type'           => 'post',
+            'post_type'           => array( 'page' ),
             'page_id'           => $page
         ));
 
@@ -122,31 +140,34 @@ class Productpage_info_widget extends WP_Widget
 
         ?>
 
-
-
-
-
-        <div class="ts-info ts-info2">
+        <div class="ts-info <?php echo $style == 'style2'?'ts-info2':''; ?> " style="background-image: url(<?php echo $image_url; ?>); background-color:<?php echo $background_color; ?> ;  background-size:cover;background-repeat: no-repeat;">
+        <?php
+        if ( $get_featured_posts->have_posts() ) :
+            while ($get_featured_posts->have_posts()) : $get_featured_posts->the_post(); ?>
             <div class="ts-container">
+
                 <div class="ts-info-desc">
+
                     <div class="ts-title">
-                        <h2>Info Title 1</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididuEst meis intellegat dissentiet ad, nec ei mundi semper graecis, sea nostro minimum maiestatis cu. Ius cu veniam aperiam mnesarchum, aliquid argumentum sit at. Mei an harum tacimates, pro no fugit essent mandamus. Esse erat suscipiantur vis at. Detracto efficiantur signiferumque ea vix, alia erant ad vim. His diam sapientem no, has nonumy populo cu.Est meis intellegat dissentiet ad, nec ei mundi semper graecis, sea nostro minimum maiestatis cu.nt ut labore et dolsectetur adipisicing elit,ore magna aliqua.</p>
+                        <h2><?php echo the_title(); ?></h2>
+
+                        <p><?php echo productpage_excerpt(get_the_content(), $desc_limit); ?></p>
                     </div>
-                    <a href="#">Learn More</a>
+                    <a href="<?php the_permalink(); ?>"><?php echo $button_text; ?></a>
+
                 </div>
+
                 <figure class="ts-info-img">
-                    <img src="images/p1.png">
+                    <?php the_post_thumbnail('large'); ?>
                 </figure>
+
             </div>
+            <?php endwhile;
+            wp_reset_postdata();
+        endif;
+        ?>
+
         </div>
-
-
-
-
-
-
 
         <?php echo $after_widget;
     }// end of widdget function.
