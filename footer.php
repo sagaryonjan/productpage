@@ -24,10 +24,14 @@
 
 		<div class="ts-bottom-footer">
 			<div class="ts-container">
-				<p>&copy RainbowNews 2016, All Rights Reserved. Powered By WordPress.</p>
-				<p>Designed By ThemeSpade &spades;</p>
+				<?php productpage_footer_copyright_info(); ?>
+				<!--<p>&copy RainbowNews 2016, All Rights Reserved. Powered By WordPress.</p>
+				<p>Designed By ThemeSpade &spades;</p>-->
 			</div>
-		</div>  
+		</div>
+
+
+
 
 		<div class="ts-scroll-top">
 			<span class="ts-scroll-top-inner"><i class="fa fa-long-arrow-up"></i></span>
