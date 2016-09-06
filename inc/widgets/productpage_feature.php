@@ -10,9 +10,9 @@
  */
 
 
-add_action('widgets_init', 'register_productpage_featured');
+add_action('widgets_init', 'productpage_featured_register');
 
-function register_productpage_featured()
+function productpage_featured_register()
 {
     register_widget("productpage_featured");
 }
@@ -23,81 +23,80 @@ class Productpage_Featured extends WP_Widget
     function __construct()
     {
         $widget_ops = array(
-            'classname'      => 'productpage_featured',
-            'description'    => esc_html__('Display latest posts or posts of specific category.', 'productpage'));
+            'classname'      =>  'productpage_featured',
+            'description'    =>  esc_html__('Display latest posts or posts of specific category.', 'productpage'));
 
         parent::__construct( 'productpage_featured', '&nbsp;' . __('&spades; TS: Our Feature ', 'productpage'), $widget_ops);
     }// end of construct.
 
     function form($instance)
     {
-        $defaults['title']          =  '';
-        $defaults['description']    =  '';
-        $defaults['description_limit']    =  50;
-        $defaults['image_url']  =  '';
+        $ts_defaults['title']        =  '';
+        $ts_defaults['description']  =  '';
+        $ts_defaults['desc_limit']   =  50;
+        $ts_defaults['image_url']    =  '';
 
         for ($i=0; $i<5; $i++) {
-            $defaults['page_' . $i] = '';
+            $ts_defaults['page_' . $i]  = '';
         }
 
-        $instance                   =  wp_parse_args((array)$instance, $defaults);
+        $instance                    =  wp_parse_args((array)$instance, $ts_defaults);
 
-        $title                      =  esc_attr($instance['title']);
-        $text                       =  esc_attr($instance['description']);
-        $description_limit          =  esc_attr($instance['description_limit']);
-        $image_url                   =  'image_url';
-
-
+        $ts_title                    =  $instance['title'];
+        $ts_text                     =  $instance['description'];
+        $ts_desc_limit               =  $instance['desc_limit'];
+        $ts_image_url                =  'image_url';
 
         ?>
 
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'productpage'); ?></label>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php esc_html_e('Title: ', 'productpage'); ?></label>
 
-            <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>"/>
+            <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr( $ts_title ); ?>"/>
         </p>
 
         <p>
-            <label for="<?php echo $this->get_field_id($image_url); ?>"> <?php _e('Advertisement Image ', 'productpage'); ?></label>
+            <label for="<?php echo $this->get_field_id($ts_image_url); ?>"> <?php esc_html_e(' Image: ', 'productpage'); ?></label>
 
             <?php
-            if ($instance[$image_url] != '') :
-                echo '<img id="' . $this->get_field_id($instance[$image_url] . 'preview') . '"src="' . $instance[$image_url] . '"style="max-width:250px;" /><br />';
+            if ($instance[$ts_image_url] != '') :
+                echo '<img id="' . $this->get_field_id($instance[$ts_image_url] . 'preview') . '"src="' . $instance[$ts_image_url] . '"style="max-width:250px;" /><br />';
             endif;
             ?>
 
-            <input type="text" class="widefat custom_media_url" id="<?php echo $this->get_field_id($image_url); ?>" name="<?php echo $this->get_field_name($image_url); ?>" value="<?php echo $instance[$image_url]; ?>" style="margin-top:5px;"/>
+            <input type="text" class="widefat custom_media_url" id="<?php echo $this->get_field_id($ts_image_url); ?>" name="<?php echo $this->get_field_name($ts_image_url); ?>" value="<?php echo $instance[$ts_image_url]; ?>" style="margin-top:5px;"/>
 
-            <input type="button" class="button button-primary custom_media_button" id="custom_media_button" name="<?php echo $this->get_field_name($image_url); ?>" value="<?php _e('Upload Image', 'productpage'); ?>" style="margin-top:5px; margin-right: 30px;" onclick="imageWidget.uploader( '<?php echo $this->get_field_id($image_url); ?>' ); return false;"/>
+            <input type="button" class="button button-primary custom_media_button" id="custom_media_button" name="<?php echo $this->get_field_name($ts_image_url); ?>" value="<?php esc_html_e('Upload Image', 'productpage'); ?>" style="margin-top:5px; margin-right: 30px;" onclick="imageWidget.uploader( '<?php echo $this->get_field_id($ts_image_url); ?>' ); return false;"/>
         </p>
 
         <p>
-            <label for="<?php echo $this->get_field_id('description'); ?>"><?php _e('Description', 'productpage'); ?></label>
+            <label for="<?php echo $this->get_field_id('description'); ?>"><?php esc_html_e('Description', 'productpage'); ?></label>
 
-            <textarea class="widefat" rows="10" cols="20" id="<?php echo $this->get_field_id( 'text' ); ?>" name="<?php echo $this->get_field_name( 'text' ); ?>"><?php echo esc_textarea( $text ); ?></textarea>
+            <textarea class="widefat" rows="10" cols="20" id="<?php echo $this->get_field_id( 'description' ); ?>" name="<?php echo $this->get_field_name( 'description' ); ?>"><?php echo esc_textarea( $ts_text ); ?></textarea>
         </p>
+
         <p>
-            <label for="<?php echo $this->get_field_id( 'description_limit' ); ?>"><?php esc_html_e( 'Description Limit Number:', 'productpage' ); ?></label>
+            <label for="<?php echo $this->get_field_id( 'desc_limit' ); ?>"><?php esc_html_e( 'Description Limit Number:', 'productpage' ); ?></label>
 
-            <input id="<?php echo $this->get_field_id( 'description_limit' ); ?>" class="widefat" name="<?php echo $this->get_field_name( 'description_limit' ); ?>" type="number" value="<?php echo $description_limit; ?>" size="3" />
+            <input id="<?php echo $this->get_field_id( 'desc_limit' ); ?>" class="widefat" name="<?php echo $this->get_field_name( 'desc_limit' ); ?>" type="number" value="<?php echo $ts_desc_limit; ?>" size="3" />
         </p>
-
-
 
         <?php for ($i=0; $i<5; $i++) : ?>
+
         <p>
             <label for="<?php echo $this->get_field_id( 'page' ); ?>"><?php esc_html_e( 'Page', 'productpage' ); ?>:</label>
             <?php
-            $arg = array(
-                'class' => 'widefat',
-                'show_option_none' =>' ',
-                'name' => $this->get_field_name('page_'.$i),
-                'id'   => $this->get_field_id('page_'.$i),
-                'selected' => absint( $instance['page_'.$i] )
+            $arg  =  array (
+                'class'      => 'widefat',
+                'name'       => $this->get_field_name('page_'.$i),
+                'id'         => $this->get_field_id('page_'.$i),
+                'selected'   => absint( $instance['page_'.$i] )
             );
             wp_dropdown_pages( $arg );
             ?>
+
         </p>
+
         <?php endfor; ?>
 
         <?php
@@ -106,18 +105,21 @@ class Productpage_Featured extends WP_Widget
     function update($new_instance, $old_instance)
     {
         $instance = $old_instance;
-        $instance['title']     =  sanitize_text_field($new_instance['title']);
-        $instance[ 'description_limit' ]     = absint( $new_instance[ 'description_limit' ] );
-        $image_url             =  'image_url';
 
-        $instance[$image_url]  =  esc_url_raw($new_instance[$image_url]);
+        $instance['title']         =  sanitize_text_field($new_instance['title']);
+        $instance[ 'desc_limit' ]  =  absint( $new_instance[ 'desc_limit' ] );
+        $image_url              =  'image_url';
+
+        $instance[$image_url]   =  esc_url_raw($new_instance[$image_url]);
+
         for( $i=0; $i<5; $i++ ) {
-            $instance['page_'.$i] = absint( $new_instance['page_'.$i] );
+            $instance['page_'.$i]  = absint( $new_instance['page_'.$i] );
         }
+
         if ( current_user_can('unfiltered_html') )
-            $instance[ 'text' ]     =  $new_instance[ 'text' ];
+            $instance[ 'description' ]    =  $new_instance[ 'description' ];
         else
-            $instance[ 'text' ]     = stripslashes( wp_filter_post_kses( addslashes( $new_instance[ 'text' ] ) ) );
+            $instance[ 'description' ]    = stripslashes( wp_filter_post_kses( addslashes( $new_instance[ 'description' ] ) ) );
 
         return $instance;
     }// end of update.
@@ -129,23 +131,21 @@ class Productpage_Featured extends WP_Widget
 
         global $post;
 
-        $title    =  isset($instance['title']) ? $instance['title'] : '';
-        $text     =  isset($instance['text']) ? $instance['text'] : '';
-        $desc_limit     =  isset($instance['description_limit']) ? $instance['description_limit'] : '';
+        $ts_title       =  isset($instance['title']) ? $instance['title'] : '';
+        $ts_text        =  isset($instance['description']) ? $instance['description'] : '';
+        $ts_desc_limit  =  isset($instance['desc_limit']) ? $instance['desc_limit'] : '';
 
-        $pages = array();
+        $pages       = array();
+
         for( $i=0; $i<5; $i++ ) {
             $pages[] = isset( $instance['page_'.$i] ) ? $instance['page_'.$i] : '';
         }
 
-
-
-
-
         $get_featured_posts = new WP_Query(array(
             'posts_per_page'      => 5,
             'post_type'           => array( 'page' ),
-            'page_id'           => $page
+            'post__in'            => $pages,
+            'orderby'             => 'post__in'
         ));
 
         echo $before_widget;
@@ -154,16 +154,16 @@ class Productpage_Featured extends WP_Widget
 
         <div class="ts-features">
             <div class="ts-container">
-                <?php if($title || $text): ?>
+                <?php if($ts_title || $ts_text): ?>
 
                 <div class="ts-title">
 
                     <?php
-                        if($title)
-                            echo '<h2> '. esc_html($title) . '</h2>';
+                        if($ts_title)
+                            echo '<h2> '. esc_html($ts_title) . '</h2>';
 
-                        if($text)
-                            echo '<p>'.esc_textarea($text).' </p>';
+                        if($ts_text)
+                            echo '<p>'.esc_textarea($ts_text).' </p>';
                     ?>
 
                 </div>
@@ -181,7 +181,7 @@ class Productpage_Featured extends WP_Widget
                         </div>
                         <h4> <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"> <?php the_title(); ?> </a> </h4>
 
-                        <p><?php echo productpage_excerpt(get_the_content(), $desc_limit); ?></p>
+                        <p><?php echo productpage_excerpt(get_the_content(), $ts_desc_limit); ?></p>
 
                     </div>
 

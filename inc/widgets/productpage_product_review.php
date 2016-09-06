@@ -32,66 +32,66 @@ class Productpage_Product_Review extends WP_Widget
     function form($instance)
     {
 
-        $defaults['title']          =  '';
-        $defaults['description']    =  '';
-        $defaults['desc_limit']    =  75;
-        $defaults['image_url']          =  '';
-        $defaults['background_color']   =  '#222222';
+        $ts_defaults['title']          =  '';
+        $ts_defaults['description']    =  '';
+        $ts_defaults['desc_limit']    =  75;
+        $ts_defaults['image_url']          =  '';
+        $ts_defaults['background_color']   =  '#222222';
 
-        $defaults['page_desc_limit']  =  75;
+        $ts_defaults['page_desc_limit']  =  75;
         for ($i=0; $i<5; $i++) {
-            $defaults['page_' . $i] = '';
+            $ts_defaults['page_' . $i] = '';
         }
 
-        $instance                      =  wp_parse_args((array)$instance, $defaults);
+        $instance                      =  wp_parse_args((array)$instance, $ts_defaults);
 
-        $title                         =  esc_attr($instance['title']);
-        $description                   =  esc_attr($instance['description']);
-        $desc_limit                    =  esc_attr($instance['desc_limit']);
-        $image_url                     =  'image_url';
-        $background_color              =  $instance['background_color'];
-        $page_desc_limit               =  esc_attr($instance['page_desc_limit']);
+        $ts_title                         =  $instance['title'];
+        $ts_description                   =  $instance['description'];
+        $ts_desc_limit                    =  $instance['desc_limit'];
+        $ts_image_url                     =  'image_url';
+        $ts_background_color              =  $instance['background_color'];
+        $ts_page_desc_limit               =  $instance['page_desc_limit'];
 
         ?>
 
         <label><?php _e('Lorem ipsm is the best text i have ever wrote man', 'productpage'); ?></label>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'productpage'); ?></label>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php esc_html_e('Title:', 'productpage'); ?></label>
 
-            <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>"/>
+            <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($ts_title); ?>"/>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('description'); ?>"><?php _e('Description', 'productpage'); ?></label>
+            <label for="<?php echo $this->get_field_id('description'); ?>"><?php esc_html_e('Description', 'productpage'); ?></label>
 
-            <textarea class="widefat" rows="5" cols="20" id="<?php echo $this->get_field_id( 'description' ); ?>" name="<?php echo $this->get_field_name( 'description' ); ?>"><?php echo esc_textarea( $description ); ?></textarea>
+            <textarea class="widefat" rows="5" cols="20" id="<?php echo $this->get_field_id( 'description' ); ?>" name="<?php echo $this->get_field_name( 'description' ); ?>"><?php echo esc_textarea( $ts_description ); ?></textarea>
         </p>
         <p>
             <label for="<?php echo $this->get_field_id( 'desc_limit' ); ?>"><?php esc_html_e( 'Description Limit Number:', 'productpage' ); ?></label>
 
-            <input id="<?php echo $this->get_field_id( 'desc_limit' ); ?>" class="widefat" name="<?php echo $this->get_field_name( 'desc_limit' ); ?>" type="number" value="<?php echo $desc_limit; ?>" size="3" />
+            <input id="<?php echo $this->get_field_id( 'desc_limit' ); ?>" class="widefat" name="<?php echo $this->get_field_name( 'desc_limit' ); ?>" type="number" value="<?php echo $ts_desc_limit; ?>" size="3" />
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id($image_url); ?>"> <?php _e('Background Image ', 'productpage'); ?></label>
+            <label for="<?php echo $this->get_field_id($ts_image_url); ?>"> <?php esc_html_e('Background Image ', 'productpage'); ?></label>
 
             <?php
-            if ($instance[$image_url] != '') :
-                echo '<img id="' . $this->get_field_id($instance[$image_url] . 'preview') . '"src="' . $instance[$image_url] . '"style="max-width:250px;" /><br />';
+            if ($instance[$ts_image_url] != '') :
+                echo '<img id="' . $this->get_field_id($instance[$ts_image_url] . 'preview') . '"src="' . $instance[$ts_image_url] . '"style="max-width:250px;" /><br />';
             endif;
             ?>
 
-            <input type="text" class="widefat custom_media_url" id="<?php echo $this->get_field_id($image_url); ?>" name="<?php echo $this->get_field_name($image_url); ?>" value="<?php echo $instance[$image_url]; ?>" style="margin-top:5px;"/>
+            <input type="text" class="widefat custom_media_url" id="<?php echo $this->get_field_id($ts_image_url); ?>" name="<?php echo $this->get_field_name($ts_image_url); ?>" value="<?php echo $instance[$ts_image_url]; ?>" style="margin-top:5px;"/>
 
-            <input type="button" class="button button-primary custom_media_button widefat" id="custom_media_button" name="<?php echo $this->get_field_name($image_url); ?>" value="<?php _e('Upload Image', 'productpage'); ?>" style="margin-top:5px; margin-right: 30px;" onclick="imageWidget.uploader( '<?php echo $this->get_field_id($image_url); ?>' ); return false;"/>
+            <input type="button" class="button button-primary custom_media_button widefat" id="custom_media_button" name="<?php echo $this->get_field_name($ts_image_url); ?>" value="<?php _e('Upload Image', 'productpage'); ?>" style="margin-top:5px; margin-right: 30px;" onclick="imageWidget.uploader( '<?php echo $this->get_field_id($ts_image_url); ?>' ); return false;"/>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id( 'background_color' ); ?>" class="widefat"><?php _e('Background Color', 'productpage') ?></label><br></br>
+            <label for="<?php echo $this->get_field_id( 'background_color' ); ?>" class="widefat"><?php esc_html_e('Background Color', 'productpage') ?></label><br></br>
 
-            <input class="widefat my-color-picker" id="<?php echo $this->get_field_id( 'background_color' ); ?>" name="<?php echo $this->get_field_name( 'background_color' ); ?>" value="<?php echo $background_color; ?>" type="text" />
+            <input class="widefat my-color-picker" id="<?php echo $this->get_field_id( 'background_color' ); ?>" name="<?php echo $this->get_field_name( 'background_color' ); ?>" value="<?php echo $ts_background_color; ?>" type="text" />
         </p>
         <p>
             <label for="<?php echo $this->get_field_id( 'page_desc_limit' ); ?>"><?php esc_html_e( 'Page Description Limit Number:', 'productpage' ); ?></label>
 
-            <input id="<?php echo $this->get_field_id( 'page_desc_limit' ); ?>" class="widefat" name="<?php echo $this->get_field_name( 'page_desc_limit' ); ?>" type="number" value="<?php echo $page_desc_limit; ?>" size="3" />
+            <input id="<?php echo $this->get_field_id( 'page_desc_limit' ); ?>" class="widefat" name="<?php echo $this->get_field_name( 'page_desc_limit' ); ?>" type="number" value="<?php echo $ts_page_desc_limit; ?>" size="3" />
         </p>
 
 
@@ -101,7 +101,6 @@ class Productpage_Product_Review extends WP_Widget
             <?php
             $arg = array(
                 'class' => 'widefat',
-                'show_option_none' =>' ',
                 'name' => $this->get_field_name('page_'.$i),
                 'id'   => $this->get_field_id('page_'.$i),
                 'selected' => absint( $instance['page_'.$i] )
@@ -111,10 +110,6 @@ class Productpage_Product_Review extends WP_Widget
            <br> </br>
         <?php endfor; ?>
         </p>
-
-
-
-
 
         <?php
     }// end of form.
@@ -150,14 +145,14 @@ class Productpage_Product_Review extends WP_Widget
 
         global $post;
 
-        $title    =  isset($instance['title']) ? $instance['title'] : '';
-        $description    =  isset($instance['description']) ? $instance['description'] : '';
-        $desc_limit    =  isset($instance['desc_limit']) ? $instance['desc_limit'] : '';
-        $image_url    =  isset($instance['image_url']) ? $instance['image_url'] : '';
-        $background_color     =  isset($instance['background_color']) ? $instance['background_color'] : '';
-        $page_desc_limit     =  isset($instance['page_desc_limit']) ? $instance['page_desc_limit'] : '';
+        $ts_title    =  isset($instance['title']) ? $instance['title'] : '';
+        $ts_desc    =  isset($instance['description']) ? $instance['description'] : '';
+        $ts_desc_limit    =  isset($instance['desc_limit']) ? $instance['desc_limit'] : '';
+        $ts_image_url    =  isset($instance['image_url']) ? $instance['image_url'] : '';
+        $ts_background_color     =  isset($instance['background_color']) ? $instance['background_color'] : '';
+        $ts_page_desc_limit     =  isset($instance['page_desc_limit']) ? $instance['page_desc_limit'] : '';
 
-        $pages = array();
+        $page = array();
         for( $i=0; $i<5; $i++ ) {
             $pages[] = isset( $instance['page_'.$i] ) ? $instance['page_'.$i] : '';
         }
@@ -173,11 +168,11 @@ class Productpage_Product_Review extends WP_Widget
         ?>
 
 
-        <div data-stellar-background-ratio="0.5" class="ts-reviews" style="background-image: url(<?php echo $image_url; ?>); background-color:<?php echo $background_color; ?>; background-size:cover;background-repeat: no-repeat;">
+        <div data-stellar-background-ratio="0.5" class="ts-reviews" style="background-image: url(<?php echo $ts_image_url; ?>); background-color:<?php echo $ts_background_color; ?>; background-size:cover;background-repeat: no-repeat;">
             <div class="ts-container">
                 <div class="ts-title ts-title-white">
-                    <h2><?php echo $title; ?></h2>
-                    <p><?php echo productpage_excerpt($description, $desc_limit); ?></p>
+                    <h2><?php echo esc_attr($ts_title); ?></h2>
+                    <p><?php echo productpage_excerpt($ts_desc, $ts_desc_limit); ?></p>
                 </div>
                 <div class="ts-reviews-block">
                     <div class="ts-review-swiper swiper-container">
@@ -189,7 +184,7 @@ class Productpage_Product_Review extends WP_Widget
                             <div class="swiper-slide">
 
                                 <div class="ts-reviews-single">
-                                    <p><?php echo productpage_excerpt(get_the_content(), $page_desc_limit); ?></p>
+                                    <p><?php echo productpage_excerpt(get_the_content(), $ts_page_desc_limit); ?></p>
                                     <figure class="ts-review-img">
                                         <?php the_post_thumbnail('large'); ?>
                                     </figure>
