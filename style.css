@@ -1094,11 +1094,7 @@ object {
        url('../fonts/fontawesome-webfont.woff') format('woff'), /* Pretty Modern Browsers */
        url('../fonts/fontawesome-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */ 
        url('../fonts/fontawesome-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
-} 
-
-#wpadminbar {
-	z-index: 9999999;
-}
+}  
 
 .col-2 {
 	width: calc(48% - 5px);;
@@ -1149,6 +1145,10 @@ img {
     transition: all 0.5s ease-in-out; 
 } 
 
+body.home .widget {
+	margin: 0;
+}
+
 /*=====  End of Add size Css  ======*/
 
 
@@ -1158,7 +1158,7 @@ img {
 header.site-header {
 	position: fixed;
 	width: 100%;
-	z-index: 999999;
+	z-index: 9999;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
@@ -1518,8 +1518,7 @@ header.site-header {
 /*#ts-video{ height:500px; overflow:hidden; }
 #bg{ width:100%; height:900px; }
 #content{ position:absolute; top:0px; padding:30px; color:#FFF; text-shadow:#000 2px 2px; }*/
-.ts-image {
-	margin-top: 220px;
+.ts-image { 
 	width: 100%;
 	height: 580px;
 }
@@ -1604,7 +1603,18 @@ header.site-header {
 	padding: 120px 0;
 }
 
-.ts-info-desc {
+.ts-info .ts-info-desc {
+	float: right;
+	width: 50%;
+	position: relative;
+	z-index: 999;
+}
+
+.ts-info .ts-info-desc {
+	float: right;
+}
+
+.ts-info2 .ts-info-desc {
 	float: left;
 	width: 50%;
 	position: relative;
@@ -1618,15 +1628,7 @@ header.site-header {
 	color: #444;
 	font-weight: 300;
 	font-family: 'Josefin Sans', sans-serif;  
-}
-
-.ts-info-img.ts-left {
-	float: left;
-}
-
-.ts-info-desc.ts-right {
-	float: right;
-}
+} 
 
 .ts-info-desc .ts-title h2 { 
 	text-align: left;
