@@ -139,7 +139,7 @@ class Productpage_info_widget extends WP_Widget
 
         ?>
 
-        <div class="ts-info <?php echo $ts_style == 'style2'?'ts-info2':''; ?> " style="background-image: url(<?php echo $ts_image_url; ?>); background-color:<?php echo $ts_background_color; ?> ;  background-size:cover;background-repeat: no-repeat;">
+        <div class="ts-info <?php echo $ts_style == 'style2'?'ts-info2':''; ?>" style="background-image: url(<?php echo $ts_image_url; ?>); background-color:<?php echo $ts_background_color; ?> ;  background-size:cover;background-repeat: no-repeat;">
         <?php
         if ( $get_featured_posts->have_posts() ) :
             while ($get_featured_posts->have_posts()) : $get_featured_posts->the_post(); ?>
@@ -147,10 +147,10 @@ class Productpage_info_widget extends WP_Widget
 
                 <div class="ts-info-desc">
 
-                    <div class="ts-title">
+                    <div class="ts-title" style="color:#666">
                         <h2><?php echo the_title(); ?></h2>
 
-                        <p><?php echo productpage_excerpt(get_the_content(), $ts_desc_limit); ?></p>
+                        <p style="color:#666"><?php echo productpage_excerpt(get_the_content(), $s_desc_limit); ?></p>
                     </div>
                     <a href="<?php the_permalink(); ?>"><?php echo $ts_button_text; ?></a>
 
