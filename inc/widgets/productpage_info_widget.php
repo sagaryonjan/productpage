@@ -142,17 +142,18 @@ class Productpage_info_widget extends WP_Widget
         <div class="ts-info <?php echo $ts_style == 'style2'?'ts-info2 ':' '; echo empty($ts_image_url)?'ts-no-bg':''; ?> "
              style="<?php if(!empty($ts_image_url)) : ?> background-image: url(<?php echo $ts_image_url; ?>); <?php endif; ?>
              <?php if(!empty($ts_background_color)) : ?> background-color:<?php echo $ts_background_color; ?> ; <?php endif; ?>background-size:cover;background-repeat: no-repeat;">
+
+
         <?php
         if ( $get_featured_posts->have_posts() ) :
             while ($get_featured_posts->have_posts()) : $get_featured_posts->the_post(); ?>
             <div class="ts-container">
-
                 <div class="ts-info-desc">
+                    <div class="ts-title" >
+                        <h2 style="color:#666"><?php  the_title(); ?></h2>
 
-                    <div class="ts-title">
-                        <h2><?php  the_title(); ?></h2>
+                        <p style="color:#666"><?php the_excerpt(); ?></p>
 
-                        <p><?php the_excerpt(); ?></p>
                     </div>
                     <a href="<?php the_permalink(); ?>"><?php echo $ts_button_text; ?></a>
 
