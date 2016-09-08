@@ -180,4 +180,12 @@ require get_template_directory() . '/inc/jetpack.php';
  */
 require get_template_directory() . '/inc/productpage-functions.php';
 
+require get_template_directory() . '/inc/productpage-customizer-functions.php';
+
 require get_template_directory() . '/inc/productpage-widget.php';
+
+
+/**
+ * Custome metabox.
+ */
+require get_template_directory() . '/inc/admin/meta-boxes.php';

@@ -36,3 +36,87 @@ function productpage_body_classes($classes)
 }
 
 add_filter('body_class', 'productpage_body_classes');
+
+
+function productpage_page_post_layout($productpage_classes)
+{
+
+	global $post;
+
+	$productpage_cat_sidebar_layout = get_theme_mod('productpage_category_sidebar_setting', 'right-sidebar');
+	$productpage_default_sidebar_layout = get_theme_mod('productpage_default_sidebar_setting', 'right-sidebar');
+
+	if (is_home() || is_page_template('template-home.php') || is_front_page()) {
+
+		$productpage_classes[] = '';
+
+	}
+	elseif (is_singular()) {
+
+		$productpage_post_class = get_post_meta($post->ID, 'productpage_page_specific_layout', true);
+
+		if (empty($productpage_post_class)) {
+
+			$productpage_post_class = 'right-sidebar';
+			$productpage_classes[] = $productpage_post_class;
+
+		} else {
+
+			$productpage_post_class = get_post_meta($post->ID, 'productpage_page_specific_layout', true);
+			$productpage_classes[] = $productpage_post_class;
+
+		}
+
+	}
+	elseif (is_category()) {
+
+		if (empty($productpage_cat_sidebar_layout)) {
+
+			$productpage_classes[] = 'right-sidebar';
+
+		}
+		else {
+
+			$productpage_classes[] = $productpage_cat_sidebar_layout;
+		}
+	}
+	elseif (is_archive()) {
+
+		if (empty($productpage_default_sidebar_layout)) {
+
+			$productpage_classes[] = 'right-sidebar';
+
+		} else {
+
+			$productpage_classes[] = $productpage_default_sidebar_layout;
+
+		}
+	}
+	elseif (is_search()) {
+
+		if (empty($productpage_default_sidebar_layout)) {
+
+			$productpage_classes[] = 'right-sidebar';
+
+		} else {
+
+			$productpage_classes[] = $productpage_default_sidebar_layout;
+
+		}
+	}
+	elseif (is_404()) {
+
+		$productpage_classes[] = '';
+
+	}
+	else {
+
+		$productpage_classes[] = 'right-sidebar';
+
+	}
+
+	return $productpage_classes;
+}
+
+add_filter('body_class', 'productpage_page_post_layout');
+
