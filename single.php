@@ -8,7 +8,28 @@
  */
 
 get_header(); ?>
+	<div class="ts-breadcrumb-banner">
 
+		<div data-stellar-background-ratio="0.5" class="ts-parallax-image" style="background-image: url(<?php echo esc_url(get_theme_mod('productpage_post_background_image'));?>);  background-size:cover; background-position: center center;">
+			<div class="ts-container">
+
+				<div id="productpage--breadcrumbs">
+					<div class="ts-default-title"><?php the_title(); ?></div>
+
+					<div class="ts-top-breadcrumbs">
+						<?php productpage_breadcrumbs(); ?>
+
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div id="content" class="site-content">
+	<div class="ts-container">
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
@@ -32,4 +53,6 @@ get_header(); ?>
 
 <?php
 get_sidebar();
+
+echo " </div></div>";
 get_footer();

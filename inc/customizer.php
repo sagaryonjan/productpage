@@ -23,6 +23,81 @@ function productpage_customize_register( $wp_customize ) {
 		'title'				  => esc_html__( 'General', 'productpage' ),
 	) );
 
+	// Breadcrumbs
+	$wp_customize->add_section('productpage_breadcrumbs_activate_settings', array(
+			'priority' => 1,
+			'title' => __('Activate Breadcrumbs', 'productpage'),
+			'panel' => 'general_panel'
+	));
+
+	$wp_customize->add_setting('productpage_breadcrumbs_activate', array(
+			'default' => 1,
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'productpage_checkbox_sanitize'
+	));
+
+	$wp_customize->add_control('productpage_breadcrumbs_activate', array(
+			'type' => 'checkbox',
+			'label' => __('Check to activate breadcrumbs', 'productpage'),
+			'section' => 'productpage_breadcrumbs_activate_settings',
+			'settings' => 'productpage_breadcrumbs_activate'
+	));
+
+	//page background image
+	$wp_customize->add_section('productpage_page_background_image_section', array(
+			'priority' => 3,
+			'title' => __('Background Image For Page', 'productpage'),
+			'panel' => 'general_panel'
+	));
+
+	$wp_customize->add_setting('productpage_page_background_image', array(
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'esc_url_raw'
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'productpage_page_background_image', array(
+			'label' => __('Upload background  image for page', 'productpage'),
+			'section' => 'productpage_page_background_image_section',
+			'settings' => 'productpage_page_background_image',
+	)));
+
+
+	//post background image
+	$wp_customize->add_section('productpage_post_background_image_section', array(
+			'priority' => 4,
+			'title' => __('Background Image For Post', 'productpage'),
+			'panel' => 'general_panel'
+	));
+
+	$wp_customize->add_setting('productpage_post_background_image', array(
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'esc_url_raw'
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'productpage_post_background_image', array(
+			'label' => __('Upload background image for post', 'productpage'),
+			'section' => 'productpage_post_background_image_section',
+			'settings' => 'productpage_post_background_image',
+	)));
+
+	//Default background image
+	$wp_customize->add_section('productpage_default_background_image_section', array(
+			'priority' => 10,
+			'title' => __('Background Image For Default', 'productpage'),
+			'panel' => 'general_panel'
+	));
+
+	$wp_customize->add_setting('productpage_default_background_image', array(
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'esc_url_raw'
+	));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'productpage_default_background_image', array(
+			'label' => __('Upload background image for default', 'productpage'),
+			'section' => 'productpage_default_background_image_section',
+			'settings' => 'productpage_default_background_image',
+	)));
+
 	// logo and site title position options
 	$wp_customize->add_setting( 'productpage_header_logo_placement', array(
 			'default'              =>  'header_text_only',
@@ -37,10 +112,10 @@ function productpage_customize_register( $wp_customize ) {
 			'setting'              =>  'productpage_header_logo_placement',
 			'section'              =>  'title_tagline',
 			'choices'              =>  array(
-					'header_logo_only'  =>  esc_html__('Header Logo Only', 'productpage'),
-					'header_text_only'  =>  esc_html__('Header Text Only', 'productpage'),
-					'show_both'         =>  esc_html__('Show Both', 'productpage'),
-					'disable'           =>  esc_html__('Disable', 'productpage')
+				'header_logo_only'  =>  esc_html__('Header Logo Only', 'productpage'),
+				'header_text_only'  =>  esc_html__('Header Text Only', 'productpage'),
+				'show_both'         =>  esc_html__('Show Both', 'productpage'),
+				'disable'           =>  esc_html__('Disable', 'productpage')
 			) ) );
 
 	// site layout setting
@@ -161,7 +236,65 @@ function productpage_customize_register( $wp_customize ) {
 			'section' 			     =>  'productpage_footer_scroll_section'
 	) );
 
-	//Supplementary option
+	//Contact option
+
+	$wp_customize->add_section('productpage_contact_section', array(
+			'priority'         => 27,
+			'title'            => esc_html__('Contact Us', 'productpage'),
+	));
+
+	$wp_customize->add_setting('productpage_contact_title', array(
+			'default' => '',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'sanitize_text_field'
+	));
+
+	$wp_customize->add_control('productpage_contact_title', array(
+			'type' => 'text',
+			'label' => esc_html__('Contact form title', 'productpage'),
+			'section' => 'productpage_contact_section',
+			'settings' => 'productpage_contact_title'
+	));
+
+	$wp_customize->add_setting('productpage_contact_text', array(
+			'default' => '',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'productpage_sanitize_text'
+	));
+	$wp_customize->add_control('productpage_contact_text', array(
+			'type' => 'textarea',
+			'label' => esc_html__('Choose your Text for Contact.', 'productpage'),
+			'settings' => 'productpage_contact_text',
+			'section' => 'productpage_contact_section',
+	));
+	$wp_customize->add_setting('productpage_contact_map', array(
+			'default' => '',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'productpage_sanitize_text'
+	));
+	$wp_customize->add_control('productpage_contact_map', array(
+			'type' => 'textarea',
+			'label' => esc_html__(' Map for Contact.', 'productpage'),
+			'settings' => 'productpage_contact_map',
+			'section' => 'productpage_contact_section',
+	));
+	$wp_customize->add_setting('productpage_contact_shortcode', array(
+			'default' => '',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'sanitize_text_field'
+	));
+
+	$wp_customize->add_control('productpage_contact_shortcode', array(
+			'type' => 'text',
+			'label' => esc_html__('Contact form Short code', 'productpage'),
+			'section' => 'productpage_contact_section',
+			'settings' => 'productpage_contact_shortcode'
+	));
+
+
+
+
+	//Accessories option
 	$wp_customize->add_panel( 'productpage_accessories_option',	array(
 		'capabitity'      	   =>  'edit_theme_options',
 		'description'    	   =>  esc_html__('Accessories options settings here', 'productpage'),

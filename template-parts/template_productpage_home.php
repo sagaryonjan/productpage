@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: HomePage
- * @package Spade Themes
+ * @package  ThemeSpade
  * @subpackage ProductPage
  */
 

@@ -15,12 +15,56 @@
 
 	<div class="ts-social">
 			<div class="ts-container">
-                <div class="menu-social-menu-container"><ul id="social-menu" class="menu"><li id="menu-item-37" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-37"><a href="http://facebook.com/99colorthemes"><i class="fa fa-facebook"></i></a></li>
+				<?php if (is_active_sidebar('productpage_footer1_area') || is_active_sidebar('productpage_footer2_area') || is_active_sidebar('productpage_footer3_area') || is_active_sidebar('productpage_footer4_area')) : ?>
+					<div class="ts-footer-block ts-clearblock ts-footer-column-<?php echo productpage_footer_count(); ?>">
+						<?php if (is_active_sidebar('productpage_footer1_area')) { ?>
+							<div class="ts-footer-single">
+								<?php
+								if (!dynamic_sidebar('productpage_footer1_area')):
+								endif;
+								?>
+							</div>
+						<?php } ?>
+
+						<?php if (is_active_sidebar('productpage_footer2_area')) { ?>
+							<div class="ts-footer-single">
+								<?php
+								if (!dynamic_sidebar('productpage_footer2_area')):
+								endif;
+								?>
+
+							</div>
+						<?php } ?>
+
+						<?php if (is_active_sidebar('productpage_footer3_area')) { ?>
+							<div class="ts-footer-single">
+								<?php
+								if (!dynamic_sidebar('productpage_footer3_area')):
+								endif;
+								?>
+							</div>
+						<?php } ?>
+						<?php if (is_active_sidebar('productpage_footer4_area')) { ?>
+							<div class="ts-footer-single">
+								<?php
+								if (!dynamic_sidebar('productpage_footer4_area')):
+								endif;
+
+								?>
+							</div>
+						<?php } ?>
+					</div>
+				<?php endif; ?>
+               <!-- <div class="menu-social-menu-container"><ul id="social-menu" class="menu"><li id="menu-item-37" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-37"><a href="http://facebook.com/99colorthemes"><i class="fa fa-facebook"></i></a></li>
 				<li id="menu-item-38" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-38"><a href="http://twitter.com/99colorthemes"><i class="fa fa-twitter"></i></a></li>
 				<li id="menu-item-39" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-39"><a href="https://plus.google.com/"><i class="fa fa-google-plus"></i></a></li> 
-				</ul></div>     
+				</ul>
+				</div>  -->
 			</div>       
 		</div>
+
+
+
 
 		<div class="ts-bottom-footer">
 			<div class="ts-container">
@@ -29,9 +73,6 @@
 				<p>Designed By ThemeSpade &spades;</p>-->
 			</div>
 		</div>
-
-
-
 
 		<div class="ts-scroll-top">
 			<span class="ts-scroll-top-inner"><i class="fa fa-long-arrow-up"></i></span>
