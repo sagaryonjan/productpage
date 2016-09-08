@@ -30,10 +30,16 @@
 			<div class="ts-container">
 				<div class="site-branding ts-logo">
 
+					<?php if ((get_theme_mod('productpage_header_logo_placement', 'header_text_only') == 'show_both'
+									|| get_theme_mod('productpage_header_logo_placement', 'header_text_only') == 'header_logo_only')
+							&& has_custom_logo()) : ?>
 
 						<div class="nnc-logo-img">
 							<?php productpage_the_custom_logo(); ?>
 						</div>
+
+					<?php endif; ?>
+
 
 
 					<?php

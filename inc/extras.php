@@ -43,10 +43,9 @@ function productpage_page_post_layout($productpage_classes)
 
 	global $post;
 
-	$productpage_cat_sidebar_layout = get_theme_mod('productpage_category_sidebar_setting', 'right-sidebar');
 	$productpage_default_sidebar_layout = get_theme_mod('productpage_default_sidebar_setting', 'right-sidebar');
 
-	if (is_home() || is_page_template('template-home.php') || is_front_page()) {
+	if (is_home() || is_page_template('template_productpage_home.php') || is_front_page()) {
 
 		$productpage_classes[] = '';
 
@@ -67,18 +66,6 @@ function productpage_page_post_layout($productpage_classes)
 
 		}
 
-	}
-	elseif (is_category()) {
-
-		if (empty($productpage_cat_sidebar_layout)) {
-
-			$productpage_classes[] = 'right-sidebar';
-
-		}
-		else {
-
-			$productpage_classes[] = $productpage_cat_sidebar_layout;
-		}
 	}
 	elseif (is_archive()) {
 

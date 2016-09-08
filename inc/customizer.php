@@ -15,6 +15,53 @@ function productpage_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 
+
+	/**
+	 * A class to create a radio button  for sidebar
+	 */
+	class Productpage_Image_Radio_Control extends WP_Customize_Control {
+
+		public function render_content() {
+
+			if ( empty( $this->choices ) )
+				return;
+
+			$name = '_customize-radio-' . $this->id;
+
+			?>
+			<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
+
+			<ul class="controls" id = 'productpage-img-container'>
+
+				<?php	foreach ( $this->choices as $value => $label ) :
+
+					$class = ($this->value() == $value)?'productpage-radio-img-selected productpage-radio-img-img':'productpage-radio-img-img';
+
+					?>
+
+					<li style="display: inline;">
+
+						<label>
+
+							<input <?php $this->link(); ?>style = 'display:none' type="radio" value="<?php echo esc_attr( $value ); ?>" name="<?php echo esc_attr( $name ); ?>" <?php $this->link(); checked( $this->value(), $value ); ?> />
+
+							<img src = '<?php echo esc_html( $label ); ?>' class = '<?php echo esc_attr( $class) ; ?>' />
+
+						</label>
+
+					</li>
+
+				<?php	endforeach;	?>
+
+			</ul>
+
+			<?php
+		}
+	}
+
+
+
+
 	//General Option
 	$wp_customize->add_panel( 'general_panel', array(
 		'capability' 		  => 'edit_theme_options',
@@ -44,9 +91,9 @@ function productpage_customize_register( $wp_customize ) {
 	));
 
 	//page background image
-	$wp_customize->add_section('productpage_page_background_image_section', array(
+	$wp_customize->add_section('productpage_background_image_section', array(
 			'priority' => 3,
-			'title' => __('Background Image For Page', 'productpage'),
+			'title' => __('Background Image', 'productpage'),
 			'panel' => 'general_panel'
 	));
 
@@ -57,18 +104,12 @@ function productpage_customize_register( $wp_customize ) {
 
 	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'productpage_page_background_image', array(
 			'label' => __('Upload background  image for page', 'productpage'),
-			'section' => 'productpage_page_background_image_section',
+			'section' => 'productpage_background_image_section',
 			'settings' => 'productpage_page_background_image',
 	)));
 
 
 	//post background image
-	$wp_customize->add_section('productpage_post_background_image_section', array(
-			'priority' => 4,
-			'title' => __('Background Image For Post', 'productpage'),
-			'panel' => 'general_panel'
-	));
-
 	$wp_customize->add_setting('productpage_post_background_image', array(
 			'capability' => 'edit_theme_options',
 			'sanitize_callback' => 'esc_url_raw'
@@ -76,17 +117,10 @@ function productpage_customize_register( $wp_customize ) {
 
 	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'productpage_post_background_image', array(
 			'label' => __('Upload background image for post', 'productpage'),
-			'section' => 'productpage_post_background_image_section',
+			'section' => 'productpage_background_image_section',
 			'settings' => 'productpage_post_background_image',
 	)));
-
-	//Default background image
-	$wp_customize->add_section('productpage_default_background_image_section', array(
-			'priority' => 10,
-			'title' => __('Background Image For Default', 'productpage'),
-			'panel' => 'general_panel'
-	));
-
+	//default background image
 	$wp_customize->add_setting('productpage_default_background_image', array(
 			'capability' => 'edit_theme_options',
 			'sanitize_callback' => 'esc_url_raw'
@@ -94,29 +128,34 @@ function productpage_customize_register( $wp_customize ) {
 
 	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'productpage_default_background_image', array(
 			'label' => __('Upload background image for default', 'productpage'),
-			'section' => 'productpage_default_background_image_section',
+			'section' => 'productpage_background_image_section',
 			'settings' => 'productpage_default_background_image',
 	)));
 
-	// logo and site title position options
-	$wp_customize->add_setting( 'productpage_header_logo_placement', array(
-			'default'              =>  'header_text_only',
-			'capability'           =>  'edit_theme_options',
-			'sanitize_callback'    =>  'productpage_sanitize_radio'
+	$wp_customize->add_section( 'productpage_default_sidebar_section', array(
+			'priority'             =>  10,
+			'title'                =>  esc_html__('Default Sidebar Settings', 'productpage'),
+			'panel'                =>  'general_panel'
 	) );
 
-	$wp_customize->add_control( 'productpage_header_logo_placement', array(
+	$wp_customize->add_setting( 'productpage_default_sidebar_setting', array(
+			'default'              =>  esc_html__('right-sidebar', 'productpage'),
+			'capability'           =>  'edit_theme_options',
+			'sanitize_callback'    =>  'productpage_sanitize_text'
+	) );
+
+	$wp_customize->add_control( new Productpage_Image_Radio_Control($wp_customize, 'productpage_default_sidebar_setting', array(
 			'type'                 =>  'radio',
-			'priority'             =>  20,
-			'label'                =>  esc_html__('Choose the option that you want from below.', 'productpage'),
-			'setting'              =>  'productpage_header_logo_placement',
-			'section'              =>  'title_tagline',
+			'label'                =>  esc_html__('Select default layout for default pages.', 'productpage'),
+			'section'              =>  'productpage_default_sidebar_section',
+			'settings'             =>  'productpage_default_sidebar_setting',
 			'choices'              =>  array(
-				'header_logo_only'  =>  esc_html__('Header Logo Only', 'productpage'),
-				'header_text_only'  =>  esc_html__('Header Text Only', 'productpage'),
-				'show_both'         =>  esc_html__('Show Both', 'productpage'),
-				'disable'           =>  esc_html__('Disable', 'productpage')
-			) ) );
+					'right-sidebar'               =>  PRODUCTPAGE_IMAGES_ADMIN_URL . '/right-sidebar.png',
+					'left-sidebar'                =>  PRODUCTPAGE_IMAGES_ADMIN_URL . '/left-sidebar.png',
+					'no-sidebar-content-centered' =>  PRODUCTPAGE_IMAGES_ADMIN_URL . '/no-sidebar-content-centered-layout.png',
+					'no-sidebar-full-width'       =>  PRODUCTPAGE_IMAGES_ADMIN_URL . '/no-sidebar-full-width-layout.png'
+			)
+	) ) );
 
 	// site layout setting
 	$wp_customize->add_section( 'productpage_site_layout_section', array(
@@ -151,6 +190,29 @@ function productpage_customize_register( $wp_customize ) {
 	) );
 	$wp_customize->get_section( 'title_tagline'  )->panel		= 'productpage_header_option';
 
+
+	// logo and site title position options
+	$wp_customize->add_setting( 'productpage_header_logo_placement', array(
+			'default'              =>  'header_text_only',
+			'capability'           =>  'edit_theme_options',
+			'sanitize_callback'    =>  'productpage_sanitize_radio'
+	) );
+
+	$wp_customize->add_control( 'productpage_header_logo_placement', array(
+			'type'                 =>  'radio',
+			'priority'             =>  20,
+			'label'                =>  esc_html__('Choose the option that you want from below.', 'productpage'),
+			'setting'              =>  'productpage_header_logo_placement',
+			'section'              =>  'title_tagline',
+			'choices'              =>  array(
+					'header_logo_only'  =>  esc_html__('Header Logo Only', 'productpage'),
+					'header_text_only'  =>  esc_html__('Header Text Only', 'productpage'),
+					'show_both'         =>  esc_html__('Show Both', 'productpage'),
+					'disable'           =>  esc_html__('Disable', 'productpage')
+			) ) );
+
+
+	//stickey menu
 	$wp_customize->add_section( 'productpage_sticky_menu_section', array(
 			'priority'          	 =>  25,
 			'title'             	 =>  esc_html__('Sticky Menu', 'productpage'),

@@ -64,6 +64,14 @@ function productpage_setup() {
 		'default-color' => 'ffffff',
 		'default-image' => '',
 	) ) );
+
+	// Adds Support for Custom Logo Introduced in WordPress 4.5
+	add_theme_support( 'custom-logo',
+			array(
+					'flex-width' => true,
+					'flex-height' => true,
+			)
+	);
 }
 endif;
 add_action( 'after_setup_theme', 'productpage_setup' );
@@ -135,7 +143,9 @@ function productpage_admin_scripts( $hook ) {
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );
 
-		wp_enqueue_style( 'productpage-admin-css', get_template_directory_uri() . '/css/productpage-admin.css', false, '1.0.0' );
+		wp_enqueue_style( 'productpage-admin-css', get_template_directory_uri() . '/css/admin/productpage-admin.css', false, '1.0.0' );
+
+		wp_enqueue_script( 'productpage-admin-scripts', get_template_directory_uri() . '/js/admin/productpage-admin.js', array( 'jquery' ), '1.0.0', true );
 
 		//image upload script
 		wp_enqueue_media();
@@ -143,11 +153,16 @@ function productpage_admin_scripts( $hook ) {
 
 		wp_enqueue_script( 'productpage-color-picker', get_template_directory_uri() . '/js/color-picker.js', array( 'jquery' ), '1.0.0', true );
 
-
-
 	}
 }
 add_action('admin_enqueue_scripts', 'productpage_admin_scripts');
+
+
+
+define( 'PRODUCTPAGE_MAIN_URL', get_template_directory_uri() );
+define( 'PRODUCTPAGE_IMAGES_ADMIN_URL', PRODUCTPAGE_MAIN_URL. '/images/admin' );
+
+
 
 
 
