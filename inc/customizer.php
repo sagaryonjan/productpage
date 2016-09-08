@@ -292,6 +292,18 @@ function productpage_customize_register( $wp_customize ) {
 			'section'                =>  'productpage_product_banner_section',
 	) );
 
+	$wp_customize->add_setting('productpage_slide',	array(
+					'capability'         => 'edit_theme_options',
+					'sanitize_callback'  => 'productpage_sanitize_integer'
+	) );
+
+	$wp_customize->add_control( 'productpage_slide', array(
+					'label'    => esc_html__( 'Slide ' , 'productpage' ),
+					'section'  => 'productpage_product_banner_section',
+					'type'     => 'dropdown-pages',
+					'priority' =>  10
+	) );
+
 	$wp_customize->add_setting( 'productpage_product_banner_title', array(
 			'default'                =>  'Banner Title',
 			'capability'             =>  'edit_theme_options',
