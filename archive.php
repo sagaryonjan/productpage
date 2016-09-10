@@ -17,13 +17,11 @@ $default_sidebar_layout = get_theme_mod('productpage_default_sidebar_setting', '
 			<div class="ts-container">
 
 				<div id="productpage--breadcrumbs">
-					<div class="ts-default-title"><?php the_title(); ?></div>
 
+					<div class="ts-default-title"><?php the_archive_title(); ?></div>
 					<div class="ts-top-breadcrumbs">
 						<?php productpage_breadcrumbs(); ?>
-
 					</div>
-
 
 				</div>
 
@@ -49,7 +47,7 @@ $default_sidebar_layout = get_theme_mod('productpage_default_sidebar_setting', '
 
 			<header class="page-header">
 				<?php
-					the_archive_title( '<h1 class="page-title">', '</h1>' );
+
 					the_archive_description( '<div class="archive-description">', '</div>' );
 				?>
 			</header><!-- .page-header -->

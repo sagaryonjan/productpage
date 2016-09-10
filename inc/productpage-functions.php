@@ -78,25 +78,6 @@ function productpage_widgets_init() {
 }
 add_action( 'widgets_init', 'productpage_widgets_init' );
 
-
-//productpage excerpt function
-if (!function_exists('productpage_excerpt')) :
-
-    function productpage_excerpt($productpage_content, $productpage_letter_count)
-    {
-
-        $productpage_letter_count = !empty($productpage_letter_count) ? $productpage_letter_count : 100;
-        $productpage_striped_content = strip_shortcodes($productpage_content);
-        $productpage_striped_content = strip_tags($productpage_striped_content);
-        $productpage_excerpt = mb_substr($productpage_striped_content, 0, $productpage_letter_count);
-
-
-
-        return $productpage_excerpt;
-
-    }
-endif;
-
 // productpage Breadcrums function
 if (!function_exists('productpage_breadcrumbs')) :
 

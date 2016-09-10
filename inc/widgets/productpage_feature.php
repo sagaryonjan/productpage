@@ -10,30 +10,29 @@
  */
 
 
-add_action('widgets_init', 'productpage_featured_register');
+add_action('widgets_init', 'productpage_feature_register');
 
-function productpage_featured_register()
+function productpage_feature_register()
 {
-    register_widget("productpage_featured");
+    register_widget("productpage_feature");
 }
 
-class Productpage_Featured extends WP_Widget
+class Productpage_Feature extends WP_Widget
 {
 
     function __construct()
     {
         $widget_ops = array(
-            'classname'      =>  'productpage_featured',
+            'classname'      =>  'productpage_feature',
             'description'    =>  esc_html__('Display latest posts or posts of specific category.', 'productpage'));
 
-        parent::__construct( 'productpage_featured', '&nbsp;' . __('&spades; TS: Our Feature ', 'productpage'), $widget_ops);
+        parent::__construct( 'productpage_feature', '&nbsp;' . __('&spades; TS: Our Feature ', 'productpage'), $widget_ops);
     }// end of construct.
 
     function form($instance)
     {
         $ts_defaults['title']        =  '';
         $ts_defaults['description']  =  '';
-        $ts_defaults['desc_limit']   =  300;
         $ts_defaults['image_url']    =  '';
 
         for ($i=0; $i<5; $i++) {
@@ -44,7 +43,6 @@ class Productpage_Featured extends WP_Widget
 
         $ts_title                    =  $instance['title'];
         $ts_text                     =  $instance['description'];
-        $ts_desc_limit               =  $instance['desc_limit'];
         $ts_image_url                =  'image_url';
 
         ?>
@@ -75,12 +73,6 @@ class Productpage_Featured extends WP_Widget
             <textarea class="widefat" rows="10" cols="20" id="<?php echo $this->get_field_id( 'description' ); ?>" name="<?php echo $this->get_field_name( 'description' ); ?>"><?php echo esc_textarea( $ts_text ); ?></textarea>
         </p>
 
-        <p>
-            <label for="<?php echo $this->get_field_id( 'desc_limit' ); ?>"><?php esc_html_e( 'Description Limit Number:', 'productpage' ); ?></label>
-
-            <input id="<?php echo $this->get_field_id( 'desc_limit' ); ?>" class="widefat" name="<?php echo $this->get_field_name( 'desc_limit' ); ?>" type="number" value="<?php echo $ts_desc_limit; ?>" size="3" />
-        </p>
-
         <?php for ($i=0; $i<5; $i++) : ?>
 
         <p>
@@ -106,20 +98,18 @@ class Productpage_Featured extends WP_Widget
     {
         $instance = $old_instance;
 
-        $instance['title']         =  sanitize_text_field($new_instance['title']);
-        $instance[ 'desc_limit' ]  =  absint( $new_instance[ 'desc_limit' ] );
-        $image_url              =  'image_url';
-
-        $instance[$image_url]   =  esc_url_raw($new_instance[$image_url]);
+        $instance['title']              =  sanitize_text_field($new_instance['title']);
+        $image_url                      =  'image_url';
+        $instance[$image_url]           =  esc_url_raw($new_instance[$image_url]);
 
         for( $i=0; $i<5; $i++ ) {
-            $instance['page_'.$i]  = absint( $new_instance['page_'.$i] );
+            $instance['page_'.$i]       = absint( $new_instance['page_'.$i] );
         }
 
         if ( current_user_can('unfiltered_html') )
-            $instance[ 'description' ]    =  $new_instance[ 'description' ];
+            $instance[ 'description' ]  =  $new_instance[ 'description' ];
         else
-            $instance[ 'description' ]    = stripslashes( wp_filter_post_kses( addslashes( $new_instance[ 'description' ] ) ) );
+            $instance[ 'description' ]  = stripslashes( wp_filter_post_kses( addslashes( $new_instance[ 'description' ] ) ) );
 
         return $instance;
     }// end of update.
@@ -133,15 +123,14 @@ class Productpage_Featured extends WP_Widget
 
         $ts_title       =  isset($instance['title']) ? $instance['title'] : '';
         $ts_text        =  isset($instance['description']) ? $instance['description'] : '';
-        $ts_desc_limit  =  isset($instance['desc_limit']) ? $instance['desc_limit'] : '';
-
+        $ts_image_url    =  isset($instance['image_url']) ? $instance['image_url'] : '';
         $pages       = array();
 
         for( $i=0; $i<5; $i++ ) {
             $pages[] = isset( $instance['page_'.$i] ) ? $instance['page_'.$i] : '';
         }
 
-        $get_featured_posts = new WP_Query(array(
+        $ts_get_page = new WP_Query(array(
             'posts_per_page'      => 5,
             'post_type'           => array( 'page' ),
             'post__in'            => $pages,
@@ -154,25 +143,23 @@ class Productpage_Featured extends WP_Widget
 
         <div class="ts-features">
             <div class="ts-container">
+
                 <?php if($ts_title || $ts_text): ?>
+                    <div class="ts-title">
+                        <?php
+                              if($ts_title)
+                                 echo '<h2>'.esc_attr($ts_title). '</h2>';
 
-                <div class="ts-title">
-
-                    <?php
-                        if($ts_title)
-                            echo '<h2> '. esc_html($ts_title) . '</h2>';
-
-                        if($ts_text)
-                            echo '<p>'.esc_textarea($ts_text).' </p>';
-                    ?>
-
-                </div>
-        <?php endif; ?>
+                              if($ts_text)
+                                 echo '<p>'.esc_textarea($ts_text).' </p>';
+                        ?>
+                    </div>
+                <?php endif; ?>
 
                 <div class="ts-features-block ts-clearblock">
                     <?php
-                    if ( $get_featured_posts->have_posts() ) :
-                    while ($get_featured_posts->have_posts()) : $get_featured_posts->the_post(); ?>
+                    if ( $ts_get_page->have_posts() ) :
+                    while ($ts_get_page->have_posts()) : $ts_get_page->the_post(); ?>
 
                     <div class="ts-features-single">
 
@@ -194,13 +181,12 @@ class Productpage_Featured extends WP_Widget
 
                 </div>
 
-
                 <div class="featured-image">
                     <?php
                     $output = '';
-                    if (!empty($image_url)) {
+                    if (!empty($ts_image_url)) {
 
-                        $output .= '<img src="' . $image_url . '" >';
+                        $output .= '<img src="' . $ts_image_url . '" >';
                     }
                     echo $output;
                     ?>

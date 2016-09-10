@@ -34,7 +34,6 @@ class Productpage_Frequently_Asked_Question extends WP_Widget
 
         $ts_defaults['title']              =  '';
         $ts_defaults['description']        =  '';
-        $ts_defaults['desc_limit']         =  75;
         $ts_defaults['background_color']   =  '#fff';
         for ($i=0; $i<6; $i++) {
             $ts_defaults['question'.$i]    =  '';
@@ -45,7 +44,6 @@ class Productpage_Frequently_Asked_Question extends WP_Widget
 
         $ts_title                          =  $instance['title'];
         $ts_description                    =  $instance['description'];
-        $ts_desc_limit                     =  $instance['desc_limit'];
         $ts_background_color               =  $instance['background_color'];
 
         ?>
@@ -60,11 +58,6 @@ class Productpage_Frequently_Asked_Question extends WP_Widget
             <label for="<?php echo $this->get_field_id('description'); ?>"><?php esc_html_e('Description', 'productpage'); ?></label>
 
             <textarea class="widefat" rows="5" cols="20" id="<?php echo $this->get_field_id( 'description' ); ?>" name="<?php echo $this->get_field_name( 'description' ); ?>"><?php echo esc_textarea( $ts_description ); ?></textarea>
-        </p>
-        <p>
-            <label for="<?php echo $this->get_field_id( 'desc_limit' ); ?>"><?php esc_html_e( 'Description Limit Number:', 'productpage' ); ?></label>
-
-            <input id="<?php echo $this->get_field_id( 'desc_limit' ); ?>" class="widefat" name="<?php echo $this->get_field_name( 'desc_limit' ); ?>" type="number" value="<?php echo $ts_desc_limit; ?>" size="3" />
         </p>
         <p>
             <label for="<?php echo $this->get_field_id( 'background_color' ); ?>" class="widefat"><?php esc_html_e('Background Color', 'productpage') ?></label><br></br>
@@ -82,9 +75,6 @@ class Productpage_Frequently_Asked_Question extends WP_Widget
         <?php endfor; ?>
         </p>
 
-
-
-
         <?php
     }// end of form.
 
@@ -92,7 +82,6 @@ class Productpage_Frequently_Asked_Question extends WP_Widget
     {
         $instance = $old_instance;
         $instance['title']               =  sanitize_text_field($new_instance['title']);
-        $instance[ 'desc_limit' ]        = absint( $new_instance[ 'desc_limit' ] );
         $instance['background_color']    =  $new_instance['background_color'];
 
         if ( current_user_can('unfiltered_html') )
@@ -123,33 +112,25 @@ class Productpage_Frequently_Asked_Question extends WP_Widget
 
         global $post;
 
-        $ts_title    =  isset($instance['title']) ? $instance['title'] : '';
-        $ts_description    =  isset($instance['description']) ? $instance['description'] : '';
-        $ts_desc_limit    =  isset($instance['desc_limit']) ? $instance['desc_limit'] : '';
-        $ts_background_color     =  isset($instance['background_color']) ? $instance['background_color'] : '';
+        $ts_title                 =  isset($instance['title']) ? $instance['title'] : '';
+        $ts_description           =  isset($instance['description']) ? $instance['description'] : '';
+        $ts_background_color      =  isset($instance['background_color']) ? $instance['background_color'] : '';
 
         $data = array();
         for( $i=0; $i<6; $i++ ) {
-            $data['question'.$i] = isset( $instance['question'.$i] ) ? $instance['question'.$i] : '';
-            $data['answer'.$i] = isset( $instance['answer'.$i] ) ? $instance['answer'.$i] : '';
+            $data['question'.$i]  = isset( $instance['question'.$i] ) ? $instance['question'.$i] : '';
+            $data['answer'.$i]    = isset( $instance['answer'.$i] ) ? $instance['answer'.$i] : '';
         }
 
-
-
         echo $before_widget;
-
         ?>
-
-
-
         <div class="ts-faqs" style=" background-color:<?php echo $ts_background_color; ?> ;">
             <div class="ts-container">
+
                 <div class="ts-title">
                     <h2><?php echo esc_attr($ts_title); ?></h2>
-                    <p><?php echo productpage_excerpt(esc_textarea($ts_description), $ts_desc_limit); ?></p>
-
+                    <p><?php echo esc_textarea($ts_description); ?></p>
                     <div class="faqs-list">
-
 
                     <?php for ($i = 0; $i<6; $i++) { ?>
                         <?php if(!empty($data['question'.$i] && !empty($data['answer'.$i]))): ?>
@@ -163,15 +144,11 @@ class Productpage_Frequently_Asked_Question extends WP_Widget
                         <?php endif; ?>
                     <?php  }?>
 
-
-
                     </div>
                 </div>
+
             </div>
         </div>
-
-
-
 
         <?php echo $after_widget;
     }// end of widdget function.

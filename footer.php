@@ -78,13 +78,6 @@
 			<span class="ts-scroll-top-inner"><i class="fa fa-long-arrow-up"></i></span>
 		</div>
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'productpage' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'productpage' ), 'WordPress' ); ?></a>
-			<span class="sep"> | </span>
-			<?php printf( esc_html__( 'Theme: %1$s by %2$s.', 'productpage' ), 'productpage', '<a href="http://themespade.com" rel="designer">themespade</a>' ); ?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
 </div><!-- #page -->
 
 <?php wp_footer(); ?>

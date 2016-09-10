@@ -17,7 +17,7 @@ if (!function_exists('productpage_front_banner')) :
 
         $get_featured_posts = new WP_Query(
             array(
-                'posts_per_page' => -1,
+                'posts_per_page' => 1,
                 'post_type' => array('page'),
                 'page_id' => $page_id,
             ));

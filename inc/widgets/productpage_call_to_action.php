@@ -31,7 +31,6 @@ class Productpage_Call_To_Action extends WP_Widget
 
     function form($instance)
     {
-
         $ts_defaults['page']               =  '';
         $ts_defaults['background_color']   =  '#222222';
         $ts_defaults['button_text']        =  'Learn More';
@@ -40,7 +39,6 @@ class Productpage_Call_To_Action extends WP_Widget
 
         $ts_background_color               =  $instance['background_color'];
         $ts_button_text                    =  $instance['button_text'];
-
         ?>
 
         <label><?php esc_html_e('Lorem ipsm is the best text i have ever wrote man', 'productpage'); ?></label>
@@ -93,8 +91,8 @@ class Productpage_Call_To_Action extends WP_Widget
         $ts_page              =  isset($instance['page']) ? $instance['page'] : '';
         $ts_button_text       =  isset($instance['button_text']) ? $instance['button_text'] : '';
 
-        $get_featured_posts   = new WP_Query(array(
-            'posts_per_page'  => 5,
+        $ts_get_page   = new WP_Query(array(
+            'posts_per_page'  => 1,
             'post_type'       => array( 'page' ),
             'page_id'         => $ts_page
         ));
@@ -103,17 +101,19 @@ class Productpage_Call_To_Action extends WP_Widget
 
         ?>
 
-        <div class="ts-cta" style="background-color:<?php echo $ts_background_color; ?> ;">
+        <div class="ts-cta" style="background-color:<?php echo $ts_background_color; ?>;">
             <div class="ts-container">
-        <?php
-        if ( $get_featured_posts->have_posts() ) :
-            while ($get_featured_posts->have_posts()) : $get_featured_posts->the_post(); ?>
+
+        <?php if ( $ts_get_page->have_posts() ) :
+            while ( $ts_get_page->have_posts()) : $ts_get_page->the_post(); ?>
+
                 <p><?php the_title(); ?></p>
+
             <?php endwhile;
             wp_reset_postdata();
-        endif;
-        ?>
+        endif; ?>
                 <span><a href="<?php the_permalink(); ?>"><?php echo esc_attr($ts_button_text); ?></a></span>
+
             </div>
         </div>
 

@@ -172,7 +172,7 @@ class Productpage_Product_Review extends WP_Widget
             <div class="ts-container">
                 <div class="ts-title ts-title-white">
                     <h2><?php echo esc_attr($ts_title); ?></h2>
-                    <p><?php  the_excerpt(); ?></p>
+                    <p><?php  echo esc_attr($ts_desc); ?></p>
                 </div>
                 <div class="ts-reviews-block">
                     <div class="ts-review-swiper swiper-container">

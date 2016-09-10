@@ -31,22 +31,20 @@ class Productpage_info_widget extends WP_Widget
 
     function form($instance)
     {
-
         $ts_defaults['style']              =  'style1';
         $ts_defaults['page']               =  '';
         $ts_defaults['image_url']          =  '';
-        $ts_defaults['background_color']   =  '#222222';
+        $ts_defaults['background_color']   =  '#1e1e1e';
         $ts_defaults['description_limit']  =  400;
         $ts_defaults['button_text']        =  'Learn More';
 
-        $instance                      =  wp_parse_args((array)$instance, $ts_defaults);
+        $instance                          =  wp_parse_args((array)$instance, $ts_defaults);
 
-
-        $ts_style                         =  $instance['style'];
-        $ts_image_url                     =  'image_url';
-        $ts_background_color              =  $instance['background_color'];
-        $ts_description_limit             =  esc_attr($instance['description_limit']);
-        $ts_button_text                   =  esc_attr($instance['button_text']);
+        $ts_style                          =  $instance['style'];
+        $ts_image_url                      =  'image_url';
+        $ts_background_color               =  $instance['background_color'];
+        $ts_description_limit              =  esc_attr($instance['description_limit']);
+        $ts_button_text                    =  esc_attr($instance['button_text']);
 
         ?>
 
@@ -130,7 +128,7 @@ class Productpage_info_widget extends WP_Widget
         $ts_button_text    =  isset($instance['button_text']) ? $instance['button_text'] : '';
 
         $get_featured_posts = new WP_Query(array(
-            'posts_per_page'      => 5,
+            'posts_per_page'      => 1,
             'post_type'           => array( 'page' ),
             'page_id'           => $ts_page
         ));
@@ -150,9 +148,9 @@ class Productpage_info_widget extends WP_Widget
             <div class="ts-container">
                 <div class="ts-info-desc">
                     <div class="ts-title" >
-                        <h2 style="color:#fff"><?php  the_title(); ?></h2>
+                        <h2><?php  the_title(); ?></h2>
 
-                        <div class="ts-inner-desc" style="color:#fff"><?php the_excerpt(); ?></div>
+                        <div class="ts-inner-desc"><?php the_excerpt(); ?></div>
 
                     </div>
                     <a href="<?php the_permalink(); ?>"><?php echo $ts_button_text; ?></a>
