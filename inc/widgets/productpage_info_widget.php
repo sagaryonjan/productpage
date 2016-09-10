@@ -150,9 +150,9 @@ class Productpage_info_widget extends WP_Widget
             <div class="ts-container">
                 <div class="ts-info-desc">
                     <div class="ts-title" >
-                        <h2 style="color:#666"><?php  the_title(); ?></h2>
+                        <h2 style="color:#fff"><?php  the_title(); ?></h2>
 
-                        <p style="color:#666"><?php the_excerpt(); ?></p>
+                        <div class="ts-inner-desc" style="color:#fff"><?php the_excerpt(); ?></div>
 
                     </div>
                     <a href="<?php the_permalink(); ?>"><?php echo $ts_button_text; ?></a>

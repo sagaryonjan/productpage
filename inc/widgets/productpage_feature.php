@@ -33,7 +33,7 @@ class Productpage_Featured extends WP_Widget
     {
         $ts_defaults['title']        =  '';
         $ts_defaults['description']  =  '';
-        $ts_defaults['desc_limit']   =  50;
+        $ts_defaults['desc_limit']   =  300;
         $ts_defaults['image_url']    =  '';
 
         for ($i=0; $i<5; $i++) {
