@@ -10,9 +10,9 @@
  */
 
 
-add_action('widgets_init', 'register_productpage_info_widget');
+add_action('widgets_init', 'productpage_info_widget_register');
 
-function register_productpage_info_widget()
+function productpage_info_widget_register()
 {
     register_widget("productpage_info_widget");
 }
@@ -35,7 +35,6 @@ class Productpage_info_widget extends WP_Widget
         $ts_defaults['page']               =  '';
         $ts_defaults['image_url']          =  '';
         $ts_defaults['background_color']   =  '#1e1e1e';
-        $ts_defaults['description_limit']  =  400;
         $ts_defaults['button_text']        =  'Learn More';
 
         $instance                          =  wp_parse_args((array)$instance, $ts_defaults);
@@ -43,7 +42,6 @@ class Productpage_info_widget extends WP_Widget
         $ts_style                          =  $instance['style'];
         $ts_image_url                      =  'image_url';
         $ts_background_color               =  $instance['background_color'];
-        $ts_description_limit              =  esc_attr($instance['description_limit']);
         $ts_button_text                    =  esc_attr($instance['button_text']);
 
         ?>
@@ -85,12 +83,6 @@ class Productpage_info_widget extends WP_Widget
             ?>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id( 'description_limit' ); ?>"><?php esc_html_e( 'Description Limit Number:', 'productpage' ); ?></label>
-
-            <input id="<?php echo $this->get_field_id( 'description_limit' ); ?>" class="widefat" name="<?php echo $this->get_field_name( 'description_limit' ); ?>" type="number" value="<?php echo $ts_description_limit; ?>" size="3" />
-        </p>
-
-        <p>
             <label for="<?php echo $this->get_field_id('button_text'); ?>"><?php esc_html_e('Edit Button Text:', 'productpage'); ?></label>
 
             <input class="widefat" id="<?php echo $this->get_field_id('button_text'); ?>" name="<?php echo $this->get_field_name('button_text'); ?>" type="text" value="<?php echo $ts_button_text; ?>"/>
@@ -107,8 +99,7 @@ class Productpage_info_widget extends WP_Widget
         $instance[$image_url]          =  esc_url_raw($new_instance[$image_url]);
         $instance['background_color']  =  $new_instance['background_color'];
         $instance['page']              =  absint( $new_instance['page'] );
-        $instance[ 'description_limit' ]     = absint( $new_instance[ 'description_limit' ] );
-        $instance['button_text']     =  sanitize_text_field($new_instance['button_text']);
+        $instance['button_text']       =  sanitize_text_field($new_instance['button_text']);
 
         return $instance;
     }// end of update.
@@ -123,11 +114,10 @@ class Productpage_info_widget extends WP_Widget
         $ts_style    =  isset($instance['style']) ? $instance['style'] : '';
         $ts_image_url    =  isset($instance['image_url']) ? $instance['image_url'] : '';
         $ts_background_color     =  isset($instance['background_color']) ? $instance['background_color'] : '';
-        $ts_desc_limit     =  isset($instance['description_limit']) ? $instance['description_limit'] : '';
         $ts_page =  isset($instance['page']) ? $instance['page'] : '';
         $ts_button_text    =  isset($instance['button_text']) ? $instance['button_text'] : '';
 
-        $get_featured_posts = new WP_Query(array(
+        $ts_get_page = new WP_Query(array(
             'posts_per_page'      => 1,
             'post_type'           => array( 'page' ),
             'page_id'           => $ts_page
@@ -143,24 +133,25 @@ class Productpage_info_widget extends WP_Widget
 
 
         <?php
-        if ( $get_featured_posts->have_posts() ) :
-            while ($get_featured_posts->have_posts()) : $get_featured_posts->the_post(); ?>
+        if ( $ts_get_page->have_posts() ) :
+            while ($ts_get_page->have_posts()) : $ts_get_page->the_post(); ?>
             <div class="ts-container">
                 <div class="ts-info-desc">
                     <div class="ts-title" >
-                        <h2><?php  the_title(); ?></h2>
+                        <h2><?php the_title(); ?></h2>
 
                         <div class="ts-inner-desc"><?php the_excerpt(); ?></div>
 
                     </div>
-                    <a href="<?php the_permalink(); ?>"><?php echo $ts_button_text; ?></a>
-
+                    <a href="<?php the_permalink(); ?>"><?php echo esc_attr($ts_button_text); ?></a>
                 </div>
 
+             <?php
+             if(has_post_thumbnail()): ?>
                 <figure class="ts-info-img">
                     <?php the_post_thumbnail('large'); ?>
                 </figure>
-
+              <?php endif; ?>
             </div>
             <?php endwhile;
             wp_reset_postdata();

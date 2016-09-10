@@ -15,52 +15,7 @@ function productpage_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 
-
-	/**
-	 * A class to create a radio button  for sidebar
-	 */
-	class Productpage_Image_Radio_Control extends WP_Customize_Control {
-
-		public function render_content() {
-
-			if ( empty( $this->choices ) )
-				return;
-
-			$name = '_customize-radio-' . $this->id;
-
-			?>
-			<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
-
-			<ul class="controls" id = 'productpage-img-container'>
-
-				<?php	foreach ( $this->choices as $value => $label ) :
-
-					$class = ($this->value() == $value)?'productpage-radio-img-selected productpage-radio-img-img':'productpage-radio-img-img';
-
-					?>
-
-					<li style="display: inline;">
-
-						<label>
-
-							<input <?php $this->link(); ?>style = 'display:none' type="radio" value="<?php echo esc_attr( $value ); ?>" name="<?php echo esc_attr( $name ); ?>" <?php $this->link(); checked( $this->value(), $value ); ?> />
-
-							<img src = '<?php echo esc_html( $label ); ?>' class = '<?php echo esc_attr( $class) ; ?>' />
-
-						</label>
-
-					</li>
-
-				<?php	endforeach;	?>
-
-			</ul>
-
-			<?php
-		}
-	}
-
-
-
+	require_once get_template_directory() . '/inc/wp-customize-class.php';
 
 	//General Option
 	$wp_customize->add_panel( 'general_panel', array(
@@ -418,7 +373,20 @@ function productpage_customize_register( $wp_customize ) {
 			'settings' => 'productpage_contact_text',
 			'section' => 'productpage_contact_section',
 	));
+	// contact us google map
 	$wp_customize->add_setting('productpage_contact_map', array(
+			'default' => '',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'productpage_sanitize_googlemaps'
+	));
+
+	$wp_customize->add_control('productpage_contact_map', array(
+			'type' => 'textarea',
+			'label' => esc_html__('Contact info Map', 'productpage'),
+			'section' => 'productpage_contact_section',
+			'settings' => 'productpage_contact_map'
+	));
+/*	$wp_customize->add_setting('productpage_contact_map', array(
 			'default' => '',
 			'capability' => 'edit_theme_options',
 			'sanitize_callback' => 'productpage_sanitize_text'
@@ -428,7 +396,7 @@ function productpage_customize_register( $wp_customize ) {
 			'label' => esc_html__(' Map for Contact.', 'productpage'),
 			'settings' => 'productpage_contact_map',
 			'section' => 'productpage_contact_section',
-	));
+	));*/
 	$wp_customize->add_setting('productpage_contact_shortcode', array(
 			'default' => '',
 			'capability' => 'edit_theme_options',
@@ -488,6 +456,15 @@ function productpage_customize_register( $wp_customize ) {
 		if( is_numeric( $input ) ) {
 			return intval( $input );
 		}
+	}
+
+	function productpage_sanitize_googlemaps($input)
+	{
+		global $productpage_allowedposttags;
+		$productpage_allowedposttags_iframe = productpage_map_allowed_tags($productpage_allowedposttags);
+
+		$output = wp_kses( $input, $productpage_allowedposttags_iframe);
+		return $output;
 	}
 
 

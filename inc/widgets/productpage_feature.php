@@ -70,11 +70,10 @@ class Productpage_Feature extends WP_Widget
         <p>
             <label for="<?php echo $this->get_field_id('description'); ?>"><?php esc_html_e('Description', 'productpage'); ?></label>
 
-            <textarea class="widefat" rows="10" cols="20" id="<?php echo $this->get_field_id( 'description' ); ?>" name="<?php echo $this->get_field_name( 'description' ); ?>"><?php echo esc_textarea( $ts_text ); ?></textarea>
+            <textarea class="widefat" rows="5" cols="10" id="<?php echo $this->get_field_id( 'description' ); ?>" name="<?php echo $this->get_field_name( 'description' ); ?>"><?php echo esc_textarea( $ts_text ); ?></textarea>
         </p>
 
         <?php for ($i=0; $i<5; $i++) : ?>
-
         <p>
             <label for="<?php echo $this->get_field_id( 'page' ); ?>"><?php esc_html_e( 'Page', 'productpage' ); ?>:</label>
             <?php

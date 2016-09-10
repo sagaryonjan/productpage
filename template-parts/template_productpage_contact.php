@@ -48,10 +48,18 @@ get_header();
             </main>
             <!-- #main -->
         </div>
-
+        <?php if(!empty($ts_contact_shortcode)): ?>
+            <div class="ts-contact-form">
+                <?php echo do_shortcode($ts_contact_shortcode );?>
+            </div>
+        <?php endif;
+            ?>
+        <?php if(!empty($ts_contact_map)): ?>
         <div class="ts-g-map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d98820.84275835866!2d-76.69052566756989!3d39.28481834077323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c803aed6f483b7%3A0x44896a84223e758!2sBaltimore%2C+MD%2C+USA!5e0!3m2!1sen!2snp!4v1473217524513" width="800" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
+            <?php echo $ts_contact_map; ?>
         </div>
+    <?php endif; ?>
+
     </div>
 <?php
 

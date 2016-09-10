@@ -10,9 +10,9 @@
  */
 
 
-add_action('widgets_init', 'register_productpage_video');
+add_action('widgets_init', 'productpage_video_register');
 
-function register_productpage_video()
+function productpage_video_register()
 {
     register_widget("productpage_video");
 }
@@ -34,14 +34,13 @@ class Productpage_Video extends WP_Widget
 
         $ts_defaults['title']        =  '';
         $ts_defaults['video']        =  '';
-        $ts_defaults['button_text'] =  'Learn More';
+        $ts_defaults['button_text']  =  'Learn More';
 
-        $instance                   =  wp_parse_args((array)$instance, $ts_defaults);
+        $instance                    =  wp_parse_args((array)$instance, $ts_defaults);
 
-        $ts_title                   =  $instance['title'];
-        $ts_video                   =  $instance['video'];
-        $ts_button_text             =  $instance['button_text'];
-
+        $ts_title                    =  $instance['title'];
+        $ts_video                    =  $instance['video'];
+        $ts_button_text              =  $instance['button_text'];
         ?>
 
         <label><?php _e('Lorem ipsm is the best text i have ever wrote man', 'productpage'); ?></label>
@@ -82,15 +81,13 @@ class Productpage_Video extends WP_Widget
 
         global $post;
 
-
-        $ts_title    =  isset($instance['title']) ? $instance['title'] : '';
-        $ts_video    =  isset($instance['video']) ? $instance['video'] : '';
+        $ts_title       =  isset($instance['title']) ? $instance['title'] : '';
+        $ts_video       =  isset($instance['video']) ? $instance['video'] : '';
         $button_text    =  isset($instance['button_text']) ? $instance['button_text'] : '';
 
-
         echo $before_widget;
-
         ?>
+
         <div id="ts-video" class="ts-image">
             <a class="player" data-property="{videoURL:'<?php echo esc_attr($ts_video); ?>',containment:'#ts-video', autoPlay:true, loop:true, mute:true, opacity:1, quality:'default'}"></a>
             <div class="ts-video-text">

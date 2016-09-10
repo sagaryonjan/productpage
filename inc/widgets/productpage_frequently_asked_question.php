@@ -10,9 +10,9 @@
  */
 
 
-add_action('widgets_init', 'register_productpage_frequently_asked_question');
+add_action('widgets_init', 'productpage_frequently_asked_question_register');
 
-function register_productpage_frequently_asked_question()
+function productpage_frequently_asked_question_register()
 {
     register_widget("productpage_frequently_asked_question");
 }
@@ -34,7 +34,7 @@ class Productpage_Frequently_Asked_Question extends WP_Widget
 
         $ts_defaults['title']              =  '';
         $ts_defaults['description']        =  '';
-        $ts_defaults['background_color']   =  '#fff';
+
         for ($i=0; $i<6; $i++) {
             $ts_defaults['question'.$i]    =  '';
             $ts_defaults['answer'. $i]     =  '';
@@ -44,7 +44,6 @@ class Productpage_Frequently_Asked_Question extends WP_Widget
 
         $ts_title                          =  $instance['title'];
         $ts_description                    =  $instance['description'];
-        $ts_background_color               =  $instance['background_color'];
 
         ?>
 
@@ -58,11 +57,6 @@ class Productpage_Frequently_Asked_Question extends WP_Widget
             <label for="<?php echo $this->get_field_id('description'); ?>"><?php esc_html_e('Description', 'productpage'); ?></label>
 
             <textarea class="widefat" rows="5" cols="20" id="<?php echo $this->get_field_id( 'description' ); ?>" name="<?php echo $this->get_field_name( 'description' ); ?>"><?php echo esc_textarea( $ts_description ); ?></textarea>
-        </p>
-        <p>
-            <label for="<?php echo $this->get_field_id( 'background_color' ); ?>" class="widefat"><?php esc_html_e('Background Color', 'productpage') ?></label><br></br>
-
-            <input class="widefat my-color-picker" id="<?php echo $this->get_field_id( 'background_color' ); ?>" name="<?php echo $this->get_field_name( 'background_color' ); ?>" value="<?php echo $ts_background_color; ?>" type="text" />
         </p>
         <p>
             <?php for ($i=0; $i<6; $i++) : ?>
@@ -82,7 +76,6 @@ class Productpage_Frequently_Asked_Question extends WP_Widget
     {
         $instance = $old_instance;
         $instance['title']               =  sanitize_text_field($new_instance['title']);
-        $instance['background_color']    =  $new_instance['background_color'];
 
         if ( current_user_can('unfiltered_html') )
             $instance[ 'description' ]   =  $new_instance[ 'description' ];
@@ -114,7 +107,6 @@ class Productpage_Frequently_Asked_Question extends WP_Widget
 
         $ts_title                 =  isset($instance['title']) ? $instance['title'] : '';
         $ts_description           =  isset($instance['description']) ? $instance['description'] : '';
-        $ts_background_color      =  isset($instance['background_color']) ? $instance['background_color'] : '';
 
         $data = array();
         for( $i=0; $i<6; $i++ ) {
@@ -124,12 +116,21 @@ class Productpage_Frequently_Asked_Question extends WP_Widget
 
         echo $before_widget;
         ?>
-        <div class="ts-faqs" style=" background-color:<?php echo $ts_background_color; ?> ;">
+        <div class="ts-faqs">
             <div class="ts-container">
 
-                <div class="ts-title">
-                    <h2><?php echo esc_attr($ts_title); ?></h2>
-                    <p><?php echo esc_textarea($ts_description); ?></p>
+                    <?php if($ts_title || $ts_description): ?>
+                        <div class="ts-title">
+                            <?php
+                            if($ts_title)
+                                echo '<h2>'.esc_attr($ts_title). '</h2>';
+
+                            if($ts_description)
+                                echo '<p>'.esc_textarea($ts_description).' </p>';
+                            ?>
+                        </div>
+                    <?php endif; ?>
+
                     <div class="faqs-list">
 
                     <?php for ($i = 0; $i<6; $i++) { ?>
@@ -146,8 +147,6 @@ class Productpage_Frequently_Asked_Question extends WP_Widget
 
                     </div>
                 </div>
-
-            </div>
         </div>
 
         <?php echo $after_widget;

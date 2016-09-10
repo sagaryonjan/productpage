@@ -83,3 +83,36 @@ if (!function_exists('productpage_front_banner')) :
 
 endif;
 
+if (!function_exists('productpage_map_allowed_tags')) :
+
+function productpage_map_allowed_tags( $productpage_allowedposttags ) {
+
+//Here put your conditions, depending your context
+
+//if ( !current_user_can( 'publish_posts' ) )
+//return $encrypted_lite_allowedposttags;
+
+// Here add tags and attributes you want to allow
+
+    $productpage_allowedposttags['iframe']=array(
+
+        'align' => true,
+        'width' => true,
+        'height' => true,
+        'frameborder' => true,
+        'name' => true,
+        'src' => true,
+        'id' => true,
+        'class' => true,
+        'style' => true,
+        'scrolling' => true,
+        'marginwidth' => true,
+        'marginheight' => true,
+
+    );
+    return $productpage_allowedposttags;
+
+}
+
+endif;
+
