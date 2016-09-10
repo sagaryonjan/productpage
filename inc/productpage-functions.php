@@ -31,8 +31,8 @@ function productpage_widgets_init() {
         'description'       => esc_html__('Add widgets here.', 'productpage'),
         'before_widget'     => '<section id="%1$s" class="widget %2$s">',
         'after_widget'      => '</section>',
-        'before_title'      => '<h2 class="widget-title"><span>',
-        'after_title'       => '</span></h2>',
+        'before_title'      => '<h2 class="widget-title">',
+        'after_title'       => '</h2>',
     ));
 
     register_sidebar( array(
@@ -41,8 +41,8 @@ function productpage_widgets_init() {
         'description'       => esc_html__('Add widgets here.', 'productpage'),
         'before_widget'     => '<section id="%1$s" class="widget %2$s">',
         'after_widget'      => '</section>',
-        'before_title'      => '<h2 class="widget-title"><span>',
-        'after_title'       => '</span></h2>',
+        'before_title'      => '<h2 class="widget-title">',
+        'after_title'       => '</h2>',
     ));
 
     register_sidebar( array(
@@ -51,8 +51,8 @@ function productpage_widgets_init() {
         'description'       => esc_html__('Add widgets here.', 'productpage'),
         'before_widget'     => '<section id="%1$s" class="widget %2$s">',
         'after_widget'      => '</section>',
-        'before_title'      => '<h2 class="widget-title"><span>',
-        'after_title'       => '</span></h2>',
+        'before_title'      => '<h2 class="widget-title">',
+        'after_title'       => '</h2>',
     ));
 
     register_sidebar( array(
@@ -61,8 +61,8 @@ function productpage_widgets_init() {
         'description'       => esc_html__('Add widgets here.', 'productpage'),
         'before_widget'     => '<section id="%1$s" class="widget %2$s">',
         'after_widget'      => '</section>',
-        'before_title'      => '<h2 class="widget-title"><span>',
-        'after_title'       => '</span></h2>',
+        'before_title'      => '<h2 class="widget-title">',
+        'after_title'       => '</h2>',
     ));
 
 }
