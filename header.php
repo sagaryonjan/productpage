@@ -38,7 +38,7 @@
 							</div>
 						<?php endif; ?>
 
-							<div class="nnc-logo">
+							<div class="ts-logo">
 								<?php
 								if (is_front_page() && is_home()) : ?>
 									<h1 class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>"
