@@ -386,17 +386,7 @@ function productpage_customize_register( $wp_customize ) {
 			'section' => 'productpage_contact_section',
 			'settings' => 'productpage_contact_map'
 	));
-/*	$wp_customize->add_setting('productpage_contact_map', array(
-			'default' => '',
-			'capability' => 'edit_theme_options',
-			'sanitize_callback' => 'productpage_sanitize_text'
-	));
-	$wp_customize->add_control('productpage_contact_map', array(
-			'type' => 'textarea',
-			'label' => esc_html__(' Map for Contact.', 'productpage'),
-			'settings' => 'productpage_contact_map',
-			'section' => 'productpage_contact_section',
-	));*/
+
 	$wp_customize->add_setting('productpage_contact_shortcode', array(
 			'default' => '',
 			'capability' => 'edit_theme_options',
@@ -409,9 +399,6 @@ function productpage_customize_register( $wp_customize ) {
 			'section' => 'productpage_contact_section',
 			'settings' => 'productpage_contact_shortcode'
 	));
-
-
-
 
 	//Accessories option
 	$wp_customize->add_panel( 'productpage_accessories_option',	array(

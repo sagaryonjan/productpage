@@ -51,11 +51,11 @@ if (!function_exists('productpage_front_banner')) :
                                 <div class="ts-button">
 
                                     <?php if (!empty($productpage_banner_detail_button)) : ?>
-                                        <span><a href="#"><?php echo esc_attr($productpage_banner_detail_button); ?></a></span>
+                                        <span><a href="<?php the_permalink(); ?>"><?php echo esc_attr($productpage_banner_detail_button); ?></a></span>
                                     <?php endif; ?>
 
                                     <?php if (!empty($productpage_banner_buy_now_button)) : ?>
-                                        <span class="active"><a href="<?php the_permalink(); ?>"><?php echo esc_attr($productpage_banner_buy_now_button); ?></a></span>
+                                        <span class="active"><a href=""><?php echo esc_attr($productpage_banner_buy_now_button); ?></a></span>
                                     <?php endif; ?>
 
                                 </div>
