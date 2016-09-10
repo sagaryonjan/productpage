@@ -23,17 +23,16 @@ get_header();
 
                     <div class="ts-top-breadcrumbs">
                         <?php productpage_breadcrumbs(); ?>
-                        <!--<a href="http://localhost/productpage" class="breadcrumb_home_text">Home</a>
-                        <span class="breadcrumb_separator"> / </span>
-                        <a href="http://localhost/productpage/category/business/">Business</a>-->
                     </div>
-
 
                 </div>
 
             </div>
         </div>
     </div>
+<?php
+while ( have_posts() ) : the_post();
+    ?>
     <div id="content" class="site-content">
         <div class="ts-container">
             <main id="main" class="site-main" role="main">
@@ -41,9 +40,8 @@ get_header();
                     <?php if(! empty($ts_contact_title)): ?>
                     <h4><?php echo esc_attr($ts_contact_title); ?></h4>
                     <?php endif; ?>
-                <?php if(! empty($ts_contact_text)): ?>
-                    <p><?php echo esc_textarea($ts_contact_text); ?></p>
-                <?php endif; ?>
+
+                    <p><?php the_content(); ?></p>
                 </div>
             </main>
             <!-- #main -->
@@ -61,6 +59,10 @@ get_header();
     <?php endif; ?>
 
     </div>
+    <?php
+
+endwhile; // End of the loop.
+?>
 <?php
 
 get_footer();

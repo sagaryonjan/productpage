@@ -48,7 +48,7 @@ function productpage_customize_register( $wp_customize ) {
 	//page background image
 	$wp_customize->add_section('productpage_background_image_section', array(
 			'priority' => 3,
-			'title' => __('Background Image', 'productpage'),
+			'title' => __('Top Banner Image', 'productpage'),
 			'panel' => 'general_panel'
 	));
 
@@ -186,41 +186,11 @@ function productpage_customize_register( $wp_customize ) {
 			'section' 			     =>  'productpage_sticky_menu_section'
 	) );
 
-	$wp_customize->add_section( 'productpage_menu_layout_section', array(
-			'priority'          	 =>  30,
-			'title'             	 =>  esc_html__('Menu Layout', 'productpage'),
-			'panel'             	 =>  'productpage_header_option'
-	) );
-
-	$wp_customize->add_setting( 'productpage_menu_layout', array(
-			'default'               =>  'side_menu',
-			'capability'            =>  'edit_theme_options',
-			'sanitize_callback'     =>  'productpage_sanitize_radio'
-	) );
-	$wp_customize->add_control( 'productpage_menu_layout', array(
-			'type'                 =>  'radio',
-			'priority'             =>  10,
-			'label'                =>  esc_html__('Choose your menu layout. The change is reflected in whole site.', 'productpage'),
-			'section'              =>  'productpage_menu_layout_section',
-			'setting'              =>  'productpage_menu_layout',
-			'choices'              =>  array(
-				'side_menu'               =>  esc_html__('Side Menu', 'productpage'),
-				'header_menu'              =>  esc_html__('Header Menu', 'productpage')
-			)
-	) );
-
-	//Front Page
-	$wp_customize->add_panel( 'productpage_front_page_option',	array(
-			'capabitity'      	   =>  'edit_theme_options',
-			'description'    	   =>  esc_html__('Front Page options settings here', 'productpage'),
-			'priority' 		 	   =>  20,
-			'title' 		 	   =>  esc_html__( 'Front Page', 'productpage' )
-	) );
-
+	// Product Section
 	$wp_customize->add_section( 'productpage_product_banner_section', array(
-			'priority'          	 =>  10,
+			'priority'          	 =>  20,
 			'title'             	 =>  esc_html__('Product Banner', 'productpage'),
-			'panel'             	 =>  'productpage_front_page_option'
+
 	) );
 
 	$wp_customize->add_setting( 'productpage_product_banner_checkbox', array(
@@ -305,45 +275,27 @@ function productpage_customize_register( $wp_customize ) {
 		'priority' 		 	   =>  25,
 		'title' 		 	   =>  esc_html__( 'Footer', 'productpage' )
 	) );
+	// Footer Background Color Setting
+	$wp_customize->add_section('productpage_footer_background_color_section', array(
+			'priority'          	 =>  10,
+			'title'             	 =>  esc_html__('Background Color', 'productpage'),
+			'panel'                 => 'productpage_footer_option'
+	));
 
-	$wp_customize->add_section( 'productpage_footer_background_color_section', array(
-		'priority'          	 =>  10,
-		'title'             	 =>  esc_html__('Background Color', 'productpage'),
-		'panel'             	 =>  'productpage_footer_option'
-	) );
+	$wp_customize->add_setting('productpage_footer_background_color',array(
+			'default'              => '#141414',
+			'capability'           => 'edit_theme_options',
+			'sanitize_callback'    => 'productpage_hex_color_sanitize',
+			'sanitize_js_callback' => 'productpage_color_escaping_sanitize'
+	));
 
-	$wp_customize->add_setting( 'productpage_footer_background_color', array(
-			'default' 				 =>  '',
-			'capability' 			 =>  'edit_theme_options',
-			'sanitize_callback' 	 =>  'productpage_checkbox_sanitize'
-	) );
-	$wp_customize->add_control( 'productpage_footer_background_color', array(
-			'type' 				     =>  'checkbox',
-			'label' 			     =>  esc_html__( 'Enable Scroll Top Button', 'productpage' ),
-			'settings' 			     =>  'productpage_footer_background_color',
-			'section' 			     =>  'productpage_footer_background_color_section'
-	) );
-
-	$wp_customize->add_section( 'productpage_footer_scroll_section', array(
-		'priority'          	 =>  30,
-		'title'             	 =>  esc_html__('Show/Hide Scroll Top Button', 'productpage'),
-		'panel'             	 =>  'productpage_footer_option'
-	) );
-
-	$wp_customize->add_setting( 'productpage_footer_scroll_checkbox', array(
-			'default' 				 =>  '',
-			'capability' 			 =>  'edit_theme_options',
-			'sanitize_callback' 	 =>  'productpage_checkbox_sanitize'
-	) );
-	$wp_customize->add_control( 'productpage_footer_scroll_checkbox', array(
-			'type' 				     =>  'checkbox',
-			'label' 			     =>  esc_html__( 'Enable Scroll Top Button', 'productpage' ),
-			'settings' 			     =>  'productpage_footer_scroll_checkbox',
-			'section' 			     =>  'productpage_footer_scroll_section'
-	) );
+	$wp_customize->add_control(new WP_Customize_Color_Control($wp_customize,'productpage_footer_background_color',array(
+			'label'              => esc_html__( 'Choose a background color for footer', 'productpage' ),
+			'section'            => 'productpage_footer_background_color_section',
+			'setting'            => 'productpage_footer_background_color'
+	)));
 
 	//Contact option
-
 	$wp_customize->add_section('productpage_contact_section', array(
 			'priority'         => 27,
 			'title'            => esc_html__('Contact Us', 'productpage'),
@@ -362,17 +314,6 @@ function productpage_customize_register( $wp_customize ) {
 			'settings' => 'productpage_contact_title'
 	));
 
-	$wp_customize->add_setting('productpage_contact_text', array(
-			'default' => '',
-			'capability' => 'edit_theme_options',
-			'sanitize_callback' => 'productpage_sanitize_text'
-	));
-	$wp_customize->add_control('productpage_contact_text', array(
-			'type' => 'textarea',
-			'label' => esc_html__('Choose your Text for Contact.', 'productpage'),
-			'settings' => 'productpage_contact_text',
-			'section' => 'productpage_contact_section',
-	));
 	// contact us google map
 	$wp_customize->add_setting('productpage_contact_map', array(
 			'default' => '',
@@ -478,6 +419,15 @@ function productpage_customize_register( $wp_customize ) {
 		$choices = $setting->manager->get_control($setting->id)->choices;
 		// If the input is a valid key, return it, else, return the default.
 		return (array_key_exists($input, $choices) ? $input : $setting->default);
+	}
+
+	function productpage_hex_color_sanitize( $color ) {
+		return sanitize_hex_color( $color );
+	}
+	// Escape Color
+	function productpage_color_escaping_sanitize( $input ) {
+		$input = esc_attr($input);
+		return $input;
 	}
 }
 add_action( 'customize_register', 'productpage_customize_register' );

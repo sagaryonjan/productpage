@@ -9,11 +9,12 @@
  * @package ProductPage
  */
 
+$background_color = get_theme_mod('productpage_footer_background_color');
 ?>
 
 	</div><!-- #content -->
 
-		<footer class="ts-footer">
+		<footer class="ts-footer" style="background-color:<?php echo $background_color ?>; ">
 			<div class="ts-container">
 				<?php if (is_active_sidebar('productpage_footer1_area') || is_active_sidebar('productpage_footer2_area') || is_active_sidebar('productpage_footer3_area') || is_active_sidebar('productpage_footer4_area')) : ?>
 					<div class="ts-footer-block ts-clearblock ts-footer-column-<?php echo productpage_footer_count(); ?>">
@@ -58,8 +59,6 @@
 
 			</div>       
 		</footer>
-
-
 
 
 		<div class="ts-bottom-footer">
