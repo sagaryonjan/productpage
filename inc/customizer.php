@@ -273,7 +273,7 @@ function productpage_customize_register( $wp_customize ) {
 			'capability' 			 =>  'edit_theme_options',
 			'sanitize_callback' 	 =>  'productpage_checkbox_sanitize'
 	) );
-	
+
 	$wp_customize->add_control( 'productpage_product_banner_checkbox', array(
 			'type' 				     =>  'checkbox',
 			'label' 			     =>  esc_html__( 'Enable Product Banner', 'productpage' ),
@@ -301,6 +301,7 @@ function productpage_customize_register( $wp_customize ) {
 	$wp_customize->add_control( 'productpage_slide', array(
 					'label'    => esc_html__( 'Slide ' , 'productpage' ),
 					'section'  => 'productpage_product_banner_section',
+					'setting'  => 'productpage_slide',
 					'type'     => 'dropdown-pages',
 					'priority' =>  10
 	) );
@@ -482,7 +483,12 @@ function productpage_customize_register( $wp_customize ) {
 			'section'                =>  'productpage_accessories_custom_coder_section',
 	) );
 
-
+	// Sanitize Integer
+	function productpage_sanitize_integer( $input ) {
+		if( is_numeric( $input ) ) {
+			return intval( $input );
+		}
+	}
 
 
 	//sanitize checkbox function

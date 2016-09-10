@@ -176,12 +176,14 @@ class Productpage_Featured extends WP_Widget
 
                     <div class="ts-features-single">
 
-                        <div class="ts-icon">
-                            <i class="fa fa-magic"></i>
+                        <div class="ts-hex-image" style="background-image: url(<?php the_post_thumbnail_url(); ?>); background-size:cover; background-repeat: no-repeat;">
+                            <span class="ts-top"></span>
+                            <span class="ts-bottom"></span>
                         </div>
+
                         <h4> <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"> <?php the_title(); ?> </a> </h4>
 
-                        <p><?php echo productpage_excerpt(get_the_content(), $ts_desc_limit); ?></p>
+                        <p><?php the_excerpt(); ?></p>
 
                     </div>
 

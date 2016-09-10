@@ -172,7 +172,7 @@ class Productpage_Product_Review extends WP_Widget
             <div class="ts-container">
                 <div class="ts-title ts-title-white">
                     <h2><?php echo esc_attr($ts_title); ?></h2>
-                    <p><?php echo productpage_excerpt($ts_desc, $ts_desc_limit); ?></p>
+                    <p><?php  the_excerpt(); ?></p>
                 </div>
                 <div class="ts-reviews-block">
                     <div class="ts-review-swiper swiper-container">
@@ -184,10 +184,14 @@ class Productpage_Product_Review extends WP_Widget
                             <div class="swiper-slide">
 
                                 <div class="ts-reviews-single">
-                                    <p><?php echo productpage_excerpt(get_the_content(), $ts_page_desc_limit); ?></p>
+                                    <p><?php the_excerpt(); ?></p>
+
+                                <?php if(has_post_thumbnail() ) : ?>
                                     <figure class="ts-review-img">
+
                                         <?php the_post_thumbnail('large'); ?>
                                     </figure>
+                                 <?php endif; ?>
                                     <h4><?php the_title(); ?></h4>
                                 </div>
 
