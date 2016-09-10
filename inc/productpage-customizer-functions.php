@@ -42,10 +42,10 @@ if (!function_exists('productpage_front_banner')) :
                                     <h3><?php echo esc_attr($productpage_banner_caption); ?></h3>
                                 <?php endif; ?>
 
-                                        <h2><?php the_title(); ?></h2>
+                                <h2><?php the_title(); ?></h2>
 
                                 <div class="ts-dtl">
-                                    <p><?php the_excerpt(); ?></p>
+                                    <?php the_excerpt(); ?>
                                 </div>
 
                                 <div class="ts-button">
@@ -55,7 +55,7 @@ if (!function_exists('productpage_front_banner')) :
                                     <?php endif; ?>
 
                                     <?php if (!empty($productpage_banner_buy_now_button)) : ?>
-                                        <span class="active"><a href="#"><?php echo esc_attr($productpage_banner_buy_now_button); ?></a></span>
+                                        <span class="active"><a href="<?php the_permalink(); ?>"><?php echo esc_attr($productpage_banner_buy_now_button); ?></a></span>
                                     <?php endif; ?>
 
                                 </div>
