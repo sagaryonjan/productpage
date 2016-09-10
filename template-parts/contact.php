@@ -44,14 +44,16 @@ while ( have_posts() ) : the_post();
                     <p><?php the_content(); ?></p>
                 </div>
             </main>
-            <!-- #main -->
-        </div>
-        <?php if(!empty($ts_contact_shortcode)): ?>
+
+            <?php if(!empty($ts_contact_shortcode)): ?>
             <div class="ts-contact-form">
                 <?php echo do_shortcode($ts_contact_shortcode );?>
             </div>
-        <?php endif;
+            <?php endif;
             ?>
+            <!-- #main -->
+        </div>
+        
         <?php if(!empty($ts_contact_map)): ?>
         <div class="ts-g-map">
             <?php echo $ts_contact_map; ?>

@@ -2049,8 +2049,7 @@ body.left-sidebar #primary {
 
 .ts-default-title {
 	font-size: 30px;
-	padding: 10px 24px;
-	margin-bottom: 25px;
+	padding: 10px 24px; 
 	font-family: 'Raleway', sans-serif;
 	border: 1px solid #eee;
 	display: inline-block;
@@ -2062,6 +2061,10 @@ body.left-sidebar #primary {
 	color: #fff;
 	position: relative;
 	z-index: 1;
+}
+
+.ts-top-breadcrumbs {
+	margin-top: 25px;
 }
 
 .ts-top-breadcrumbs a {
@@ -2422,6 +2425,15 @@ h1.page-title {
 /*=============================================
 =            Default Widgets            =
 =============================================*/
+input.search-submit {
+    display: none;
+}
+
+input.search-field {
+    width: 100%;
+    font-size: 14px;
+    padding: 8px;
+}
 
 h2.widget-title {
 	font-size: 20px;
@@ -2525,6 +2537,45 @@ h2.widget-title:before {
 .ts-g-map iframe {
 	width: 100%;
 	line-height: 0;
+}
+
+/*CF7*/
+.wpcf7-form p {
+	padding: 8px 0;
+}
+
+input.wpcf7-form-control {
+	width: 100%;
+	padding: 6px 8px;
+	font-size: 14px;
+	border-radius: 0;
+}
+
+textarea.wpcf7-form-control {
+	width: 100%;
+	padding: 6px 8px;
+	font-size: 14px;
+	border-radius: 0;
+}
+
+input.wpcf7-submit {
+	background: #666;
+	box-shadow: none;
+	text-shadow: none;
+	color: #fff;
+	border: 0;
+	padding: 12px;
+	border-radius: 0;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+} 
+
+input.wpcf7-submit:hover {
+	background: #4db2ec;
+	box-shadow: none; 
 }
 
 
