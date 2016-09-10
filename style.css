@@ -1904,8 +1904,45 @@ figure.ts-review-img {
 	line-height: 24px;
 }
 
-.ts-footer
+.ts-footer h2.widget-title {
+	color: #fff;
+}
 
+.ts-footer .widget li a {
+	color: #fff;
+}
+
+.ts-footer .widget li {
+	color: #fff;
+}
+
+.ts-footer .textwidget {
+	color: #fff;
+}
+
+.ts-footer .calendar_wrap td { 
+	color: #fff;
+}
+
+.ts-footer .calendar_wrap th {
+	border: 1px solid #fff;
+	text-align: center;
+	font-size: 14px;
+	padding: 8px;
+	color: #fff;
+}
+
+.ts-footer .calendar_wrap caption {
+	border: 1px solid #fff;
+	border-bottom: 0;
+	font-size: 16px;
+	color: #fff;
+	padding: 12px;
+}
+
+.ts-footer .calendar_wrap td a {
+	color: #fff; 
+}
 
 /*=====  End of Footer  ======*/
 
@@ -2437,11 +2474,11 @@ h2.widget-title:before {
 }
 
 #today {
-	background: blue;
+	background: #05b2dc;
 }
 
 #today:hover {
-	background: blue;
+	background: #05b2dc;
 }
 
 
