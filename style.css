@@ -1874,8 +1874,7 @@ figure.ts-review-img {
 .ts-footer {
 	margin-top: 40px;
 	padding: 40px 0 0;
-	background: #2C2C34;
-	border-top: 4px solid #05b2dc;
+	background: #222; 
 }
 
 .ts-footer-single {
@@ -1894,7 +1893,7 @@ figure.ts-review-img {
 }
 
 .ts-bottom-footer {
-	background: #2C2C34;
+	background: #111;
 	padding: 14px 0;
 	text-align: center;
 }
@@ -1904,6 +1903,8 @@ figure.ts-review-img {
 	font-size: 13px; 
 	line-height: 24px;
 }
+
+.ts-footer
 
 
 /*=====  End of Footer  ======*/
