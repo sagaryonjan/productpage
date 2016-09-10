@@ -273,6 +273,7 @@ function productpage_customize_register( $wp_customize ) {
 			'capability' 			 =>  'edit_theme_options',
 			'sanitize_callback' 	 =>  'productpage_checkbox_sanitize'
 	) );
+	
 	$wp_customize->add_control( 'productpage_product_banner_checkbox', array(
 			'type' 				     =>  'checkbox',
 			'label' 			     =>  esc_html__( 'Enable Product Banner', 'productpage' ),
@@ -304,17 +305,6 @@ function productpage_customize_register( $wp_customize ) {
 					'priority' =>  10
 	) );
 
-	$wp_customize->add_setting( 'productpage_product_banner_title', array(
-			'default'                =>  'Banner Title',
-			'capability'             =>  'edit_theme_options',
-			'sanitize_callback'	     =>  'productpage_sanitize_text'
-	) );
-	$wp_customize->add_control( 'productpage_product_banner_title', array(
-			'type' 				     =>  'text',
-			'label'                  =>  esc_html__('Choose your Title for Product Banner.', 'productpage'),
-			'settings' 			     =>  'productpage_product_banner_title',
-			'section'                =>  'productpage_product_banner_section',
-	) );
 
 	$wp_customize->add_setting( 'productpage_detail_button', array(
 			'default'                =>  'Detail',
@@ -340,50 +330,14 @@ function productpage_customize_register( $wp_customize ) {
 			'section'                =>  'productpage_product_banner_section',
 	) );
 
-	$wp_customize->add_setting( 'productpage_product_link', array(
-			'default'                =>  'Slider Learn More',
-			'capability'             =>  'edit_theme_options',
-			'sanitize_callback'	     =>  'productpage_sanitize_text'
-	) );
-	$wp_customize->add_control( 'productpage_product_link', array(
-			'type' 				     =>  'text',
-			'label'                  =>  esc_html__('Learn More Link.', 'productpage'),
-			'settings' 			     =>  'productpage_product_link',
-			'section'                =>  'productpage_product_banner_section',
-	) );
-
-
-	$wp_customize->add_setting('productpage_slider_description', array(
-			'default' => 'Slider Textarea',
-			'capability' => 'edit_theme_options',
-			'sanitize_callback' => 'productpage_sanitize_text'
-	));
-	$wp_customize->add_control('productpage_slider_description', array(
-			'type' => 'textarea',
-			'label' => esc_html__('Choose your Description for slider.', 'productpage'),
-			'settings' => 'productpage_slider_description',
-			'section' => 'productpage_product_banner_section',
-	));
-
-
 	$wp_customize->add_setting( 'productpage_product_banner',array(
 			'sanitize_callback'		=>  'esc_attr',
 	) );
+
 	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'productpage_product_banner', array(
 			'label' 				=>  __('Product Banner ','productpage'),
 			'section' 				=>  'productpage_product_banner_section',
 			'settings' 				=>  'productpage_product_banner',
-			'flex_width'  			=>  false, // Allow any width, making the specified value recommended. False by default.
-			'flex_height' 			=>  false, // Require the resulting image to be exactly as tall as the height attribute (default).
-	) ) );
-
-	$wp_customize->add_setting( 'productpage_banner_image', array(
-			'sanitize_callback' 	 =>  'esc_attr',
-	) );
-	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'productpage_banner_image', array(
-			'label'					=>  __('Edit Banner Image ','productpage'),
-			'section'				=>  'productpage_product_banner_section',
-			'settings' 				=>  'productpage_banner_image',
 			'flex_width'  			=>  false, // Allow any width, making the specified value recommended. False by default.
 			'flex_height' 			=>  false, // Require the resulting image to be exactly as tall as the height attribute (default).
 	) ) );

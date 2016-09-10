@@ -19,4 +19,3 @@ require get_template_directory() . '/inc/widgets/productpage_frequently_asked_qu
 
 require get_template_directory() . '/inc/widgets/productpage_video.php';
 
-require get_template_directory() . '/inc/widgets/productpage_slider.php';
