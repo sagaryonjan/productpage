@@ -1502,6 +1502,7 @@ p.site-description {
 .ts-features-single:nth-child(4) {
     left: -80px;
     position: relative;
+    clear: both;
 }
 
 .ts-features-single:nth-child(5) { 
@@ -1780,6 +1781,7 @@ p.site-description {
 	display: inline-block;
 	font-size: 15px;
 	font-weight: 300;
+	margin-top: 20px;
 }
 
 figure.ts-review-img {
@@ -1788,7 +1790,7 @@ figure.ts-review-img {
 	width: 100px;
 	height: 100px;
 	overflow: hidden;
-	margin: 20px auto;
+	margin: 20px auto 0;
 }
 
 /*=====  End of ts Reviews  ======*/
@@ -1869,19 +1871,18 @@ figure.ts-review-img {
 
 
 /*==============================
-=            Footer            =
+=          figure.ts-review-img  Footer            =
 ==============================*/
-.ts-footer {
-	margin-top: 40px;
-	padding: 40px 0 0;
-	background: #222; 
+.ts-footer { 
+	padding: 90px 0 0;
+	background: #141414; 
 }
 
 .ts-footer-single {
     width: 20%;
     float: left;
     margin-left: 58px;
-    padding-bottom: 40px;
+    padding-bottom: 90px;
 }
 
 .ts-footer-single:nth-child(1) { 
@@ -1910,6 +1911,10 @@ figure.ts-review-img {
 
 .ts-footer .widget li a {
 	color: #fff;
+}
+
+.ts-footer .widget li a:hover {
+	color: #05b2dc;
 }
 
 .ts-footer .widget li {
@@ -1943,6 +1948,10 @@ figure.ts-review-img {
 .ts-footer .calendar_wrap td a {
 	color: #fff; 
 }
+
+table#wp-calendar {
+    margin: 0;
+} 
 
 /*=====  End of Footer  ======*/
 
@@ -2056,13 +2065,17 @@ body.left-sidebar #primary {
 }
 
 .ts-top-breadcrumbs a {
-	color: #fff;
+	color: #05b2dc;
 	font-size: 14px;
 	font-family: 'Raleway', sans-serif;
 }
 
 .ts-top-breadcrumbs a:hover {
 	color: #05b2dc;
+}
+
+a.breadcrumb_home_text {
+    color: #fff;
 }
 
 /*=====  End of TS Breadcrumbs  ======*/
