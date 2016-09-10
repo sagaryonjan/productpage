@@ -7,7 +7,10 @@
  * @package ProductPage
  */
 
-get_header(); ?>
+get_header();
+
+$sidebar_layout = get_post_meta( $post->ID, 'productpage_page_specific_layout', true );
+?>
 	<div class="ts-breadcrumb-banner">
 
 		<div data-stellar-background-ratio="0.5" class="ts-parallax-image" style="background-image: url(<?php echo esc_url(get_theme_mod('productpage_post_background_image'));?>);  background-size:cover; background-position: center center;">
@@ -28,8 +31,19 @@ get_header(); ?>
 		</div>
 	</div>
 
+
+
 	<div id="content" class="site-content">
 	<div class="ts-container">
+
+<?php if($sidebar_layout == 'left-sidebar'):
+	?>
+	<aside id="secondary" class="widget-area" role="complementary">
+		<?php dynamic_sidebar('productpage_left_sidebar'); ?>
+	</aside><!-- #secondary -->
+	<?php
+endif;
+?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
@@ -52,7 +66,8 @@ get_header(); ?>
 	</div><!-- #primary -->
 
 <?php
-get_sidebar();
-
+if($sidebar_layout == 'right-sidebar'):
+	get_sidebar();
+endif;
 echo " </div></div>";
 get_footer();

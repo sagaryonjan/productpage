@@ -7,7 +7,9 @@
  * @package ProductPage
  */
 
-get_header(); ?>
+get_header();
+$default_sidebar_layout = get_theme_mod('productpage_default_sidebar_setting', 'right-sidebar');
+?>
 
 	<div class="ts-breadcrumb-banner">
 
@@ -30,6 +32,15 @@ get_header(); ?>
 	</div>
 	<div id="content" class="site-content">
 	<div class="ts-container">
+	<?php
+	if ($default_sidebar_layout == 'left-sidebar'):
+		?>
+		<aside id="secondary" class="widget-area" role="complementary">
+			<?php dynamic_sidebar('productpage_left_sidebar'); ?>
+		</aside><!-- #secondary -->
+		<?php
+	endif;
+	?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
@@ -68,7 +79,9 @@ get_header(); ?>
 	</div><!-- #primary -->
 
 <?php
-get_sidebar();
+if ($default_sidebar_layout == 'right-sidebar'):
+	get_sidebar();
+endif;
 
 echo " </div></div>";
 get_footer();
