@@ -55,7 +55,7 @@
 						<?php } ?>
 					</div>
 				<?php endif; ?>
-	           
+
 			</div>       
 		</footer>
 
@@ -64,9 +64,8 @@
 
 		<div class="ts-bottom-footer">
 			<div class="ts-container">
-				<?php /*productpage_footer_copyright_info(); */?>
-				<p>&copy RainbowNews 2016, All Rights Reserved. Powered By WordPress.</p>
-				<p>Designed By ThemeSpade &spades;</p>
+				<?php productpage_footer_copyright_info(); ?>
+
 			</div>
 		</div>
 

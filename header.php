@@ -25,11 +25,11 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'productpage' ); ?></a>
 
-	<header id="masthead" class="site-header" role="banner">
+	<header id="masthead" class="site-header ts-sticky" role="banner">
 			<div class="ts-top-header ts-clearblock">
 
 				<div class="ts-container">
-					<div class="site-branding ">
+					<div class="site-branding">
 
 						<?php if ((get_theme_mod('productpage_header_logo_placement', 'header_text_only') == 'show_both'
 								|| get_theme_mod('productpage_header_logo_placement', 'header_text_only') == 'header_logo_only') && has_custom_logo()) : ?>

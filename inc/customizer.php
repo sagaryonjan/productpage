@@ -167,7 +167,7 @@ function productpage_customize_register( $wp_customize ) {
 			) ) );
 
 
-	//stickey menu
+	//sticky menu
 	$wp_customize->add_section( 'productpage_sticky_menu_section', array(
 			'priority'          	 =>  25,
 			'title'             	 =>  esc_html__('Sticky Menu', 'productpage'),
