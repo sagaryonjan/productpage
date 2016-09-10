@@ -181,7 +181,7 @@ function productpage_customize_register( $wp_customize ) {
 	) );
 	$wp_customize->add_control( 'productpage_sticky_menu', array(
 			'type' 				     =>  'checkbox',
-			'label' 			     =>  esc_html__( 'Enable Sticky Menu', 'productpage' ),
+			'label' 			     =>  esc_html__( 'Disable Sticky Menu', 'productpage' ),
 			'settings' 			     =>  'productpage_sticky_menu',
 			'section' 			     =>  'productpage_sticky_menu_section'
 	) );

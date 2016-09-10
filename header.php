@@ -24,8 +24,8 @@
 
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'productpage' ); ?></a>
-
-	<header id="masthead" class="site-header ts-sticky" role="banner">
+		<?php  $sticky = get_theme_mod('productpage_sticky_menu'); ?>
+	<header id="masthead" class="site-header <?php echo $sticky == 1?'ts-fixed':''; ?>" role="banner">
 			<div class="ts-top-header ts-clearblock">
 
 				<div class="ts-container">
