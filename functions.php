@@ -162,6 +162,17 @@ add_action('admin_enqueue_scripts', 'productpage_admin_scripts');
 define( 'PRODUCTPAGE_MAIN_URL', get_template_directory_uri() );
 define( 'PRODUCTPAGE_IMAGES_ADMIN_URL', PRODUCTPAGE_MAIN_URL. '/images/admin' );
 
+/**
+ * Filter the except length to 20 characters.
+ *
+ * @param int $length Excerpt length.
+ * @return int (Maybe) modified excerpt length.
+ */
+function productpage_custom_excerpt_length( $length  ) {
+	return 30;
+}
+add_filter( 'excerpt_length', 'productpage_custom_excerpt_length', 999 );
+
 
 
 

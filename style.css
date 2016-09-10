@@ -1480,8 +1480,7 @@ p.site-description {
 	font-size: 16px;
 	color: #111;
 	font-weight: 500;
-	margin: 60px 0 16px;
-	display: inline-block;
+	display: block;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
@@ -2479,4 +2478,55 @@ h2.widget-title:before {
 
 /*=====  End of Contact Us  ======*/
 
+.ts-hex-image {
+	width: 108px;
+	height: 126px;
+	position: relative;
+	margin: 0 auto;
+	display: inline-block;
+	overflow: hidden;
+}
+
+span.ts-top:before {
+	content: '';
+	border-right: 56px solid transparent;
+	border-left: 0 solid #fff;
+	width: 0;
+	border-top: 36px solid #fff;
+	position: absolute;
+	left: 0;
+}
+
+span.ts-top:after {
+	content: '';
+	border-left: 56px solid transparent;
+	border-right: 0 solid #fff;
+	width: 0;
+	border-top: 36px solid #fff;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+span.ts-bottom:before {
+	content: '';
+	border-left: 56px solid #fff;
+	border-right: 0 solid transparent;
+	width: 0;
+	border-top: 36px solid transparent;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+span.ts-bottom:after {
+	content: '';
+	border-right: 56px solid #fff;
+	border-left: 0 solid transparent;
+	width: 0;
+	border-top: 36px solid transparent;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
 

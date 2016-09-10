@@ -146,7 +146,7 @@ class Productpage_Frequently_Asked_Question extends WP_Widget
             <div class="ts-container">
                 <div class="ts-title">
                     <h2><?php echo esc_attr($ts_title); ?></h2>
-                    <p><?php echo productpage_excerpt(esc_textarea($ts_description), $ts_desc_limit);; ?></p>
+                    <p><?php echo productpage_excerpt(esc_textarea($ts_description), $ts_desc_limit); ?></p>
 
                     <div class="faqs-list">
 
