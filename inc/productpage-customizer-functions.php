@@ -9,10 +9,20 @@ if (!function_exists('productpage_front_banner')) :
         $productpage_banner_caption = get_theme_mod('productpage_product_banner_caption');
         $productpage_banner_detail_button = get_theme_mod('productpage_detail_button');
         $productpage_banner_buy_now_button = get_theme_mod('productpage_buy_now_button');
+        $productpage_category = get_theme_mod('productpage_products_category');
 
-
-
-        $page_id = get_theme_mod('productpage_slide');
+        $get_featured_posts = new WP_Query( array(
+            'post_type' => 'product',
+            'tax_query' => array(
+                array(
+                    'taxonomy'  => 'product_cat',
+                    'field'     => 'id',
+                    'terms'     => $productpage_category
+                )
+            ),
+            'posts_per_page' => 1
+        ) );
+      /*  $page_id = get_theme_mod('productpage_slide');
 
 
         $get_featured_posts = new WP_Query(
@@ -20,7 +30,7 @@ if (!function_exists('productpage_front_banner')) :
                 'posts_per_page' => 1,
                 'post_type' => array('page'),
                 'page_id' => $page_id,
-            ));
+            ));*/
 
 
         if (get_theme_mod('productpage_product_banner_checkbox') == '1') : ?>
@@ -31,9 +41,11 @@ if (!function_exists('productpage_front_banner')) :
                      style="background-image: url(<?php echo esc_url(get_theme_mod('productpage_product_banner')); ?>); background-size:cover; background-repeat: no-repeat;">
                     <div class="ts-container">
 
-                        <?php
-                        if ($get_featured_posts->have_posts()) :
-                        while ($get_featured_posts->have_posts()) : $get_featured_posts->the_post(); ?>
+            <?php
+            while( $get_featured_posts->have_posts() ):
+                $get_featured_posts->the_post();
+                    ?>
+
                         <div class="ts-desc">
 
                             <div class="ts-content">
@@ -41,11 +53,9 @@ if (!function_exists('productpage_front_banner')) :
                                 <?php if (!empty($productpage_banner_caption)) : ?>
                                     <h3><?php echo esc_attr($productpage_banner_caption); ?></h3>
                                 <?php endif; ?>
-
-                                <h2><?php the_title(); ?></h2>
-
+                                <a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
                                 <div class="ts-dtl">
-                                    <?php the_excerpt(); ?>
+                                    <p><?php the_excerpt(); ?></p>
                                 </div>
 
                                 <div class="ts-button">
@@ -55,24 +65,33 @@ if (!function_exists('productpage_front_banner')) :
                                     <?php endif; ?>
 
                                     <?php if (!empty($productpage_banner_buy_now_button)) : ?>
-                                        <span class="active"><a href=""><?php echo esc_attr($productpage_banner_buy_now_button); ?></a></span>
+                                        <span class="active"><a href="<?php the_permalink(); ?>"><?php echo esc_attr($productpage_banner_buy_now_button); ?></a></span>
                                     <?php endif; ?>
-
                                 </div>
 
                             </div>
 
-                            <?php if(has_post_thumbnail() ) : ?>
-                            <figure class="ts-product-img ts-right">
-                                <?php the_post_thumbnail('large'); ?>
-                            </figure>
-                            <?php endif; ?>
+
+                        <!--    <figure class="ts-product-img ts-right">
+                                <?php
+/*                                $thumbnail_id = get_woocommerce_term_meta( $cat->term_id, 'thumbnail_id', true );
+                                //$image = wp_get_attachment_url( $thumbnail_id );
+                                $image = wp_get_attachment_image_src( $thumbnail_id, 'estore-featured-image');
+                                if ( $image[0] ) {
+                                    echo '<img src="' . esc_url( $image[0] ) . '" alt="" />';
+                                }
+                                // @todo: Default Place holder image needed
+                                */?>
+
+                            </figure>-->
 
                         </div>
-                        <?php endwhile;
-                            wp_reset_postdata();
-                        endif;
-                        ?>
+                    <?php
+
+            endwhile;
+            // Reset Post Data
+            wp_reset_postdata();
+            ?>
                     </div>
                 </div>
             </div>

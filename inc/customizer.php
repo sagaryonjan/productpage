@@ -218,7 +218,7 @@ function productpage_customize_register( $wp_customize ) {
 			'section'                =>  'productpage_product_banner_section',
 	) );
 
-	$wp_customize->add_setting('productpage_slide',	array(
+	/*$wp_customize->add_setting('productpage_slide',	array(
 					'capability'         => 'edit_theme_options',
 					'sanitize_callback'  => 'productpage_sanitize_integer'
 	) );
@@ -229,8 +229,35 @@ function productpage_customize_register( $wp_customize ) {
 					'setting'  => 'productpage_slide',
 					'type'     => 'dropdown-pages',
 					'priority' =>  10
-	) );
+	) );*/
 
+	$productpage_prod_categories_array = array('-' => __('Select category','productpage'));
+
+	$productpage_prod_categories = get_categories( array('taxonomy' => 'product_cat', 'hide_empty' => 0, 'title_li' => '') );
+
+	if( !empty($productpage_prod_categories) ):
+		foreach ($productpage_prod_categories as $productpage_prod_cat):
+
+			if( !empty($productpage_prod_cat->term_id) && !empty($productpage_prod_cat->name) ):
+				$productpage_prod_categories_array[$productpage_prod_cat->term_id] = $productpage_prod_cat->name;
+			endif;
+
+		endforeach;
+	endif;
+
+	/* Category */
+	$wp_customize->add_setting( 'productpage_products_category', array(
+			'transport' => 'postMessage',
+			'sanitize_callback' => 'productpage_sanitize_text'
+	));
+	$wp_customize->add_control( 'productpage_products_category', array(
+			'type' 		   => 'select',
+			'label' 	   => __( 'Products category', 'productpage' ),
+			'description'  => __( 'OR pick a product category. If no shortcode or no category is selected , WooCommerce latest products are displaying.', 'productpage' ),
+			'section' 	   => 'productpage_product_banner_section',
+			'choices'      => $productpage_prod_categories_array,
+			'priority' 	   => 4,
+	));
 
 	$wp_customize->add_setting( 'productpage_detail_button', array(
 			'default'                =>  'Detail',
@@ -339,7 +366,7 @@ function productpage_customize_register( $wp_customize ) {
 			'label' => esc_html__('Contact form Short code', 'productpage'),
 			'section' => 'productpage_contact_section',
 			'settings' => 'productpage_contact_shortcode'
-	));
+	) );
 
 	//Accessories option
 	$wp_customize->add_panel( 'productpage_accessories_option',	array(
