@@ -4,9 +4,9 @@
  *
  * Eventually, some of the functionality here could be replaced by core features.
  *
- * @package 99colorthemes
- * @subpackage RainbowNews
- * @since RainbowNews 1.0
+ * @package themespade
+ * @subpackage ProductPage
+ * @since ProductPage 1.0
  */
 if (!class_exists('WP_Customize_Control'))
     return NULL;

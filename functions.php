@@ -177,9 +177,6 @@ function productpage_custom_excerpt_length( $length  ) {
 add_filter( 'excerpt_length', 'productpage_custom_excerpt_length', 999 );
 
 
-
-
-
 /**
  * Implement the Custom Header feature.
  */
@@ -212,7 +209,6 @@ require get_template_directory() . '/inc/productpage-functions.php';
 require get_template_directory() . '/inc/productpage-customizer-functions.php';
 
 require get_template_directory() . '/inc/productpage-widget.php';
-
 
 /**
  * Custome metabox.

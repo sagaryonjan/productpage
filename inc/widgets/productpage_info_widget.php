@@ -4,11 +4,10 @@
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package RainbowNews
+ * @package ProductPage
  *
- * ProductPage Featured  Widget Section
+ * ProductPage Info Widget Section
  */
-
 
 add_action('widgets_init', 'productpage_info_widget_register');
 
@@ -17,9 +16,8 @@ function productpage_info_widget_register()
     register_widget("productpage_info_widget");
 }
 
-class Productpage_info_widget extends WP_Widget
+class Productpage_Info_Widget extends WP_Widget
 {
-
     function __construct()
     {
         $widget_ops = array(
@@ -43,9 +41,7 @@ class Productpage_info_widget extends WP_Widget
         $ts_image_url                      =  'image_url';
         $ts_background_color               =  $instance['background_color'];
         $ts_button_text                    =  esc_attr($instance['button_text']);
-
         ?>
-
         <label><?php esc_html_e('Lorem ipsm is the best text i have ever wrote man', 'productpage'); ?></label>
         <p>
             <input type="radio" <?php checked($ts_style, 'style1') ?> id="<?php echo $this->get_field_id('style'); ?>" name="<?php echo $this->get_field_name('style'); ?>" value="style1"/><?php esc_html_e('Style 1', 'productpage'); ?><br/>
@@ -85,7 +81,7 @@ class Productpage_info_widget extends WP_Widget
         <p>
             <label for="<?php echo $this->get_field_id('button_text'); ?>"><?php esc_html_e('Edit Button Text:', 'productpage'); ?></label>
 
-            <input class="widefat" id="<?php echo $this->get_field_id('button_text'); ?>" name="<?php echo $this->get_field_name('button_text'); ?>" type="text" value="<?php echo $ts_button_text; ?>"/>
+            <input class="widefat" id="<?php echo $this->get_field_id('button_text'); ?>" name="<?php echo $this->get_field_name('button_text'); ?>" type="text" value="<?php echo esc_attr($ts_button_text); ?>"/>
         </p>
 
         <?php
@@ -97,7 +93,7 @@ class Productpage_info_widget extends WP_Widget
         $instance['style']             =  $new_instance['style'];
         $image_url                     =  'image_url';
         $instance[$image_url]          =  esc_url_raw($new_instance[$image_url]);
-        $instance['background_color']  =  $new_instance['background_color'];
+        $instance['background_color']  =  sanitize_hex_color($new_instance['background_color']);
         $instance['page']              =  absint( $new_instance['page'] );
         $instance['button_text']       =  sanitize_text_field($new_instance['button_text']);
 
@@ -123,46 +119,35 @@ class Productpage_info_widget extends WP_Widget
             'page_id'           => $ts_page
         ));
 
-        echo $before_widget;
-
-        ?>
-
+        echo $before_widget; ?>
         <div class="ts-info <?php echo $ts_style == 'style2'?'ts-info2 ':' '; echo empty($ts_image_url)?'ts-no-bg':''; ?> "
              style="<?php if(!empty($ts_image_url)) : ?> background-image: url(<?php echo $ts_image_url; ?>); <?php endif; ?>
              <?php if(!empty($ts_background_color)) : ?> background-color:<?php echo $ts_background_color; ?> ; <?php endif; ?>background-size:cover;background-repeat: no-repeat;">
 
+            <?php if ( $ts_get_page->have_posts() ) :
+                while ($ts_get_page->have_posts()) : $ts_get_page->the_post(); ?>
 
-        <?php
-        if ( $ts_get_page->have_posts() ) :
-            while ($ts_get_page->have_posts()) : $ts_get_page->the_post(); ?>
-            <div class="ts-container">
-                <div class="ts-info-desc">
-                    <div class="ts-title" >
-                        <h2><?php the_title(); ?></h2>
-
-                        <div class="ts-inner-desc"><?php the_excerpt(); ?></div>
-
+                <div class="ts-container">
+                    <div class="ts-info-desc">
+                        <div class="ts-title" >
+                            <h2><?php the_title(); ?></h2>
+                            <div class="ts-inner-desc"><?php the_excerpt(); ?></div>
+                        </div>
+                        <a href="<?php the_permalink(); ?>"><?php echo esc_attr($ts_button_text); ?></a>
                     </div>
-                    <a href="<?php the_permalink(); ?>"><?php echo esc_attr($ts_button_text); ?></a>
+                     <?php
+                     if(has_post_thumbnail()): ?>
+                        <figure class="ts-info-img">
+                            <?php the_post_thumbnail('large'); ?>
+                        </figure>
+                      <?php endif; ?>
                 </div>
 
-             <?php
-             if(has_post_thumbnail()): ?>
-                <figure class="ts-info-img">
-                    <?php the_post_thumbnail('large'); ?>
-                </figure>
-              <?php endif; ?>
-            </div>
-            <?php endwhile;
-            wp_reset_postdata();
-        endif;
-        ?>
+                <?php endwhile;
+                wp_reset_postdata();
+            endif; ?>
 
         </div>
-
         <?php echo $after_widget;
     }// end of widdget function.
 }// end of apply for action widget.
-
-
-

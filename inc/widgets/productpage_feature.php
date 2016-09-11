@@ -4,11 +4,10 @@
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package RainbowNews
+ * @package ProductPage
  *
- * ProductPage Featured  Widget Section
+ * ProductPage Featured  Section
  */
-
 
 add_action('widgets_init', 'productpage_feature_register');
 
@@ -19,12 +18,11 @@ function productpage_feature_register()
 
 class Productpage_Feature extends WP_Widget
 {
-
     function __construct()
     {
         $widget_ops = array(
             'classname'      =>  'productpage_feature',
-            'description'    =>  esc_html__('Display latest posts or posts of specific category.', 'productpage'));
+            'description'    =>  esc_html__('Product feature.', 'productpage'));
 
         parent::__construct( 'productpage_feature', '&nbsp;' . __('&spades; TS: Our Feature ', 'productpage'), $widget_ops);
     }// end of construct.
@@ -44,7 +42,6 @@ class Productpage_Feature extends WP_Widget
         $ts_title                    =  $instance['title'];
         $ts_text                     =  $instance['description'];
         $ts_image_url                =  'image_url';
-
         ?>
 
         <p>
@@ -52,21 +49,17 @@ class Productpage_Feature extends WP_Widget
 
             <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr( $ts_title ); ?>"/>
         </p>
-
         <p>
             <label for="<?php echo $this->get_field_id($ts_image_url); ?>"> <?php esc_html_e(' Image: ', 'productpage'); ?></label>
-
             <?php
             if ($instance[$ts_image_url] != '') :
                 echo '<img id="' . $this->get_field_id($instance[$ts_image_url] . 'preview') . '"src="' . $instance[$ts_image_url] . '"style="max-width:250px;" /><br />';
             endif;
             ?>
-
             <input type="text" class="widefat custom_media_url" id="<?php echo $this->get_field_id($ts_image_url); ?>" name="<?php echo $this->get_field_name($ts_image_url); ?>" value="<?php echo $instance[$ts_image_url]; ?>" style="margin-top:5px;"/>
 
             <input type="button" class="button button-primary custom_media_button" id="custom_media_button" name="<?php echo $this->get_field_name($ts_image_url); ?>" value="<?php esc_html_e('Upload Image', 'productpage'); ?>" style="margin-top:5px; margin-right: 30px;" onclick="imageWidget.uploader( '<?php echo $this->get_field_id($ts_image_url); ?>' ); return false;"/>
         </p>
-
         <p>
             <label for="<?php echo $this->get_field_id('description'); ?>"><?php esc_html_e('Description', 'productpage'); ?></label>
 
@@ -85,9 +78,7 @@ class Productpage_Feature extends WP_Widget
             );
             wp_dropdown_pages( $arg );
             ?>
-
         </p>
-
         <?php endfor; ?>
 
         <?php
@@ -95,8 +86,7 @@ class Productpage_Feature extends WP_Widget
 
     function update($new_instance, $old_instance)
     {
-        $instance = $old_instance;
-
+        $instance                       =  $old_instance;
         $instance['title']              =  sanitize_text_field($new_instance['title']);
         $image_url                      =  'image_url';
         $instance[$image_url]           =  esc_url_raw($new_instance[$image_url]);
@@ -136,9 +126,7 @@ class Productpage_Feature extends WP_Widget
             'orderby'             => 'post__in'
         ));
 
-        echo $before_widget;
-
-        ?>
+        echo $before_widget; ?>
 
         <div class="ts-features">
             <div class="ts-container">
@@ -168,34 +156,27 @@ class Productpage_Feature extends WP_Widget
                         </div>
 
                         <h4> <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"> <?php the_title(); ?> </a> </h4>
-
                         <?php the_excerpt(); ?>
 
                     </div>
 
                     <?php endwhile;
                         wp_reset_postdata();
-                    endif;
-                    ?>
-
+                    endif; ?>
                 </div>
 
                 <div class="featured-image">
-                    <?php
-                    $output = '';
+                    <?php $output = '';
                     if (!empty($ts_image_url)) {
 
                         $output .= '<img src="' . $ts_image_url . '" >';
                     }
-                    echo $output;
-                    ?>
+                    echo $output; ?>
                 </div>
+
             </div>
         </div>
 
         <?php echo $after_widget;
     }// end of widdget function.
 }// end of apply for action widget.
-
-
-

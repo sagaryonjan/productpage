@@ -19,9 +19,7 @@ get_header(); ?>
 
                     <div class="ts-top-breadcrumbs">
                         <?php productpage_breadcrumbs(); ?>
-
                     </div>
-
 
                 </div>
 

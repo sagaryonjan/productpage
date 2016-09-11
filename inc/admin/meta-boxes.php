@@ -2,9 +2,9 @@
 /**
  * This function is responsible for rendering metaboxes in single post area
  *
- * @package 99colorthemes
- * @subpackage PageLine
- * @since PageLine 1.0
+ * @package themespade
+ * @subpackage ProductPage
+ * @since ProductPage 1.0
  */
 
 add_action('add_meta_boxes', 'productpage_add_custom_box');
