@@ -73,7 +73,7 @@ class Productpage_Call_To_Action extends WP_Widget
     function update($new_instance, $old_instance)
     {
         $instance = $old_instance;
-        $instance['background_color']  =  $new_instance['background_color'];
+        $instance['background_color']  =  sanitize_hex_color($new_instance['background_color']);
         $instance['page']              =  absint( $new_instance['page'] );
         $instance['button_text']       =  sanitize_text_field($new_instance['button_text']);
 
