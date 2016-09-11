@@ -2633,3 +2633,32 @@ span.ts-bottom:after {
 	right: 0;
 }
 
+
+/*====================================
+=            Woo-Commerce            =
+====================================*/ 
+.woocommerce #content div.product div.images, .woocommerce div.product div.images, .woocommerce-page #content div.product div.images, .woocommerce-page div.product div.images {
+	box-shadow: 0 0 3px 0 #ccc;
+}
+
+.woocommerce div.product div.images div.thumbnails {
+	border-top: 1px solid #eee;
+}
+
+.woocommerce #content div.product div.thumbnails a, .woocommerce div.product div.thumbnails a, .woocommerce-page #content div.product div.thumbnails a, .woocommerce-page div.product div.thumbnails a {
+    border-right: 1px solid #eee;
+    padding-right: 6px;
+}
+
+.woocommerce span.onsale {
+	background: #05b2dc;
+	width: 50px;
+	height: 50px; 
+	font-weight: 400;
+}
+
+.single-product #primary {
+	width: 100%;
+}
+
+/*=====  End of Woo-Commerce  ======*/

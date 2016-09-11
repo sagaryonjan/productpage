@@ -71,7 +71,10 @@ function productpage_setup() {
 					'flex-width' => true,
 					'flex-height' => true,
 			)
-	);
+	);	
+
+	// Declare WooCommerce Support
+	add_theme_support( 'woocommerce' );
 }
 endif;
 add_action( 'after_setup_theme', 'productpage_setup' );
