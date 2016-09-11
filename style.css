@@ -544,7 +544,7 @@ textarea {
     color: #fff;
     font-size: 14px;
     position: relative;
-    z-index: 999;
+    z-index: 9999;
 }
 
 .ts-menu-icon i:hover { 
@@ -554,6 +554,7 @@ textarea {
 
 .ts-main-navigation { 
     position: fixed; 
+    z-index: 999;
     top: 0; 
     right: 0;
     height: 100%;
@@ -1184,6 +1185,12 @@ p.site-description {
     padding: 8px 0;
 }
 
+.site-header.ts-fixed {
+    position: static;
+    padding: 10px 0;
+    background: #111;
+}
+
  
 /*=====  End of Header  ======*/ 
 
@@ -1627,6 +1634,7 @@ p.site-description {
 
 .ts-info-desc .ts-title h2 { 
 	text-align: left;
+	color: #fff;
 }
 
 .ts-info.ts-info2 .ts-info-img {
@@ -2811,7 +2819,7 @@ span.cart-value {
     color: #fff;
     font-size: 14px;
     position: relative;
-    z-index: 999;
+    z-index: 9999;
 }
 
 .ts-cart-icon a i:hover {
@@ -2962,5 +2970,3 @@ a.checkout-button.button.alt.wc-forward {
 }
 
 /*=====  End of Woo-Commerce  ======*/
-
- 
