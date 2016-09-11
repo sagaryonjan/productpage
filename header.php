@@ -56,14 +56,33 @@
 								endif; ?>
 							</div>
 
-
+						<div class="wishlist-cart-wrapper clearfix">
+							<?php
+							if ( class_exists( 'woocommerce' ) ) : ?>
+								<div class="cart-wrapper">
+									<div class="productpage-cart-views">
+										<a href="<?php echo esc_url( WC()->cart->get_cart_url() ); ?>" class="wcmenucart-contents">
+											<i class="fa fa-shopping-cart"></i>
+											<span class="cart-value"><?php echo wp_kses_data ( WC()->cart->get_cart_contents_count() ); ?></span>
+										</a> <!-- quick wishlist end -->
+										<div class="my-cart-wrap">
+											<div class="my-cart"><?php esc_html_e('Total', 'productpage'); ?></div>
+											<div class="cart-total"><?php echo wp_kses_data( WC()->cart->get_cart_subtotal() ); ?></div>
+										</div>
+									</div>
+									<?php the_widget( 'WC_Widget_Cart', '' ); ?>
+								</div>
+							<?php endif; ?>
+						</div>
 						<div class="ts-menu-icon"><i class="fa fa-navicon"></i></div>
+
 					</div>
 				</div>
 
 				<nav id="ts-main-nav" class="ts-main-navigation">
 					<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
 				</nav>
+
 			</div>
 
 
