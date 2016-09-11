@@ -11,6 +11,7 @@ if (!function_exists('productpage_front_banner')) :
 
         $get_featured_posts   = new WP_Query( array(
             'post_type'       =>  'product',
+            'orderby'         => 'date',
             'posts_per_page'  => 1,
             'tax_query'       =>  array(
                 array(

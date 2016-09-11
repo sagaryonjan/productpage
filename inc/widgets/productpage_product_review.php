@@ -6,9 +6,8 @@
  *
  * @package RainbowNews
  *
- * ProductPage Featured  Widget Section
+ * ProductPage Product Review Section
  */
-
 
 add_action('widgets_init', 'productpage_product_review_register');
 
@@ -19,7 +18,6 @@ function productpage_product_review_register()
 
 class Productpage_Product_Review extends WP_Widget
 {
-
     function __construct()
     {
         $widget_ops = array(
@@ -31,7 +29,6 @@ class Productpage_Product_Review extends WP_Widget
 
     function form($instance)
     {
-
         $ts_defaults['title']             =  '';
         $ts_defaults['description']       =  '';
         $ts_defaults['image_url']         =  '';
@@ -49,7 +46,7 @@ class Productpage_Product_Review extends WP_Widget
         $ts_background_color              =  $instance['background_color'];
         ?>
 
-        <label><?php _e('Lorem ipsm is the best text i have ever wrote man', 'productpage'); ?></label>
+        <label><?php esc_html_e('Lorem ipsm is the best text i have ever wrote man', 'productpage'); ?></label>
         <p>
             <label for="<?php echo $this->get_field_id('title'); ?>"><?php esc_html_e('Title:', 'productpage'); ?></label>
 
@@ -62,13 +59,11 @@ class Productpage_Product_Review extends WP_Widget
         </p>
         <p>
             <label for="<?php echo $this->get_field_id($ts_image_url); ?>"> <?php esc_html_e('Background Image ', 'productpage'); ?></label>
-
             <?php
             if ($instance[$ts_image_url] != '') :
                 echo '<img id="' . $this->get_field_id($instance[$ts_image_url] . 'preview') . '"src="' . $instance[$ts_image_url] . '"style="max-width:250px;" /><br />';
             endif;
             ?>
-
             <input type="text" class="widefat custom_media_url" id="<?php echo $this->get_field_id($ts_image_url); ?>" name="<?php echo $this->get_field_name($ts_image_url); ?>" value="<?php echo $instance[$ts_image_url]; ?>" style="margin-top:5px;"/>
 
             <input type="button" class="button button-primary custom_media_button widefat" id="custom_media_button" name="<?php echo $this->get_field_name($ts_image_url); ?>" value="<?php _e('Upload Image', 'productpage'); ?>" style="margin-top:5px; margin-right: 30px;" onclick="imageWidget.uploader( '<?php echo $this->get_field_id($ts_image_url); ?>' ); return false;"/>
@@ -78,17 +73,14 @@ class Productpage_Product_Review extends WP_Widget
 
             <input class="widefat my-color-picker" id="<?php echo $this->get_field_id( 'background_color' ); ?>" name="<?php echo $this->get_field_name( 'background_color' ); ?>" value="<?php echo $ts_background_color; ?>" type="text" />
         </p>
-
-
-
         <p>
             <label for="<?php echo $this->get_field_id( 'page' ); ?>"><?php esc_html_e( 'Page', 'productpage' ); ?>:</label>
         <?php for ($i=0; $i<5; $i++) : ?>
             <?php
             $arg = array(
-                'class' => 'widefat',
-                'name' => $this->get_field_name('page_'.$i),
-                'id'   => $this->get_field_id('page_'.$i),
+                'class'    => 'widefat',
+                'name'     => $this->get_field_name('page_'.$i),
+                'id'       => $this->get_field_id('page_'.$i),
                 'selected' => absint( $instance['page_'.$i] )
             );
             wp_dropdown_pages( $arg );
@@ -96,7 +88,6 @@ class Productpage_Product_Review extends WP_Widget
            <br> </br>
         <?php endfor; ?>
         </p>
-
         <?php
     }// end of form.
 
@@ -107,8 +98,7 @@ class Productpage_Product_Review extends WP_Widget
         $image_url                       =  'image_url';
         $instance['title']               =  sanitize_text_field($new_instance['title']);
         $instance[$image_url]            =  esc_url_raw($new_instance[$image_url]);
-        $instance['background_color']    =  $new_instance['background_color'];
-
+        $instance['background_color']    =  sanitize_hex_color($new_instance['background_color']);
 
         if ( current_user_can('unfiltered_html') )
             $instance[ 'description' ]   =  $new_instance[ 'description' ];
@@ -116,9 +106,8 @@ class Productpage_Product_Review extends WP_Widget
             $instance[ 'description' ]   = stripslashes( wp_filter_post_kses( addslashes( $new_instance[ 'description' ] ) ) );
 
         for( $i=0; $i<5; $i++ ) {
-            $instance['page_'.$i] = absint( $new_instance['page_'.$i] );
+            $instance['page_'.$i]        = absint( $new_instance['page_'.$i] );
         }
-
 
         return $instance;
     }// end of update.
@@ -130,24 +119,23 @@ class Productpage_Product_Review extends WP_Widget
 
         global $post;
 
-        $ts_title    =  isset($instance['title']) ? $instance['title'] : '';
-        $ts_desc    =  isset($instance['description']) ? $instance['description'] : '';
-        $ts_image_url    =  isset($instance['image_url']) ? $instance['image_url'] : '';
-        $ts_background_color     =  isset($instance['background_color']) ? $instance['background_color'] : '';
+        $ts_title             =  isset($instance['title']) ? $instance['title'] : '';
+        $ts_desc              =  isset($instance['description']) ? $instance['description'] : '';
+        $ts_image_url         =  isset($instance['image_url']) ? $instance['image_url'] : '';
+        $ts_background_color  =  isset($instance['background_color']) ? $instance['background_color'] : '';
 
         $page = array();
         for( $i=0; $i<5; $i++ ) {
-            $pages[] = isset( $instance['page_'.$i] ) ? $instance['page_'.$i] : '';
+            $pages[]          = isset( $instance['page_'.$i] ) ? $instance['page_'.$i] : '';
         }
 
         $ts_get_page = new WP_Query(array(
-            'posts_per_page'      => 5,
-            'post_type'           => array( 'page' ),
-            'page_id'           => $page
+            'posts_per_page'  => 5,
+            'post_type'       => array( 'page' ),
+            'page_id'         => $page
         ));
 
-        echo $before_widget;
-        ?>
+        echo $before_widget; ?>
 
         <div data-stellar-background-ratio="0.5" class="ts-reviews" style="background-image: url(<?php echo $ts_image_url; ?>); background-color:<?php echo $ts_background_color; ?>; background-size:cover;background-repeat: no-repeat;">
             <div class="ts-container">
@@ -162,45 +150,38 @@ class Productpage_Product_Review extends WP_Widget
                         ?>
                     </div>
                 <?php endif; ?>
+
                 <div class="ts-reviews-block">
                     <div class="ts-review-swiper swiper-container">
-
                         <div class="swiper-wrapper">
 
                             <?php  if ( $ts_get_page->have_posts() ) :
                             while ($ts_get_page->have_posts()) : $ts_get_page->the_post(); ?>
-                            <div class="swiper-slide">
+                                <div class="swiper-slide">
+                                    <div class="ts-reviews-single">
+                                        <p><?php the_excerpt(); ?></p>
 
-                                <div class="ts-reviews-single">
-                                    <p><?php the_excerpt(); ?></p>
+                                    <?php if(has_post_thumbnail() ) : ?>
+                                        <figure class="ts-review-img">
+                                            <?php the_post_thumbnail('large'); ?>
+                                        </figure>
+                                     <?php endif; ?>
 
-                                <?php if(has_post_thumbnail() ) : ?>
-                                    <figure class="ts-review-img">
-                                        <?php the_post_thumbnail('large'); ?>
-                                    </figure>
-                                 <?php endif; ?>
-
-                                    <h4><?php the_title(); ?></h4>
+                                        <h4><?php the_title(); ?></h4>
+                                    </div>
                                 </div>
-
-                            </div>
                             <?php endwhile;
                                 wp_reset_postdata();
-                            endif;
-                            ?>
-                        </div>
+                            endif; ?>
 
-                        <!-- Add Navigation -->
+                        </div>
                         <div class="swiper-button-prev"><i class="fa fa-angle-left"></i></div>
                         <div class="swiper-button-next"><i class="fa fa-angle-right"></i></div>
                     </div>
                 </div>
+
             </div>
         </div>
-
         <?php echo $after_widget;
     }// end of widdget function.
 }// end of apply for action widget.
-
-
-

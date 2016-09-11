@@ -4,11 +4,10 @@
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package RainbowNews
+ * @package ProductPage
  *
- * ProductPage Featured  Widget Section
+ * ProductPage Call To Action Section
  */
-
 
 add_action('widgets_init', 'productpage_call_to_action_register');
 
@@ -19,7 +18,6 @@ function productpage_call_to_action_register()
 
 class Productpage_Call_To_Action extends WP_Widget
 {
-
     function __construct()
     {
         $widget_ops = array(
@@ -40,9 +38,7 @@ class Productpage_Call_To_Action extends WP_Widget
         $ts_background_color               =  $instance['background_color'];
         $ts_button_text                    =  $instance['button_text'];
         ?>
-
         <label><?php esc_html_e('Lorem ipsm is the best text i have ever wrote man', 'productpage'); ?></label>
-
         <p>
             <label for="<?php echo $this->get_field_id( 'background_color' ); ?>" class="widefat"><?php esc_html_e('Background Color', 'productpage') ?></label><br></br>
 
@@ -60,13 +56,11 @@ class Productpage_Call_To_Action extends WP_Widget
             wp_dropdown_pages( $arg );
             ?>
         </p>
-
         <p>
             <label for="<?php echo $this->get_field_id('button_text'); ?>"><?php esc_html_e('Edit Button Text:', 'productpage'); ?></label>
 
             <input class="widefat" id="<?php echo $this->get_field_id('button_text'); ?>" name="<?php echo $this->get_field_name('button_text'); ?>" type="text" value="<?php echo esc_attr($ts_button_text); ?>"/>
         </p>
-
         <?php
     }// end of form.
 
@@ -97,30 +91,24 @@ class Productpage_Call_To_Action extends WP_Widget
             'page_id'         => $ts_page
         ));
 
-        echo $before_widget;
-
-        ?>
+        echo $before_widget; ?>
 
         <div class="ts-cta" style="background-color:<?php echo $ts_background_color; ?>;">
             <div class="ts-container">
 
-        <?php if ( $ts_get_page->have_posts() ) :
-            while ( $ts_get_page->have_posts()) : $ts_get_page->the_post(); ?>
+                <?php if ( $ts_get_page->have_posts() ) :
+                    while ( $ts_get_page->have_posts()) : $ts_get_page->the_post(); ?>
 
-                <p><?php the_title(); ?></p>
+                        <p><?php the_title(); ?></p>
 
-            <?php endwhile;
-            wp_reset_postdata();
-        endif; ?>
+                    <?php endwhile;
+                    wp_reset_postdata();
+                endif; ?>
                 <span><a href="<?php the_permalink(); ?>"><?php echo esc_attr($ts_button_text); ?></a></span>
 
             </div>
         </div>
 
-
         <?php echo $after_widget;
     }// end of widdget function.
 }// end of apply for action widget.
-
-
-

@@ -12,7 +12,6 @@
  * @package ProductPage
  */
 
-
 //productpage header funtion
 get_header();
 
