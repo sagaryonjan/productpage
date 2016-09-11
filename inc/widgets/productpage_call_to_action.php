@@ -26,7 +26,7 @@ class Productpage_Call_To_Action extends WP_Widget
             'classname'      => 'productpage_call_to_action',
             'description'    => esc_html__( ' Product Info ', 'productpage'));
 
-        parent::__construct( 'productpage_call_to_action', '&nbsp;' . __('&spades; TS: Call To Action ', 'productpage'), $widget_ops);
+        parent::__construct( 'productpage_call_to_action', '&nbsp;' . esc_html__('&spades; TS: Call To Action ', 'productpage'), $widget_ops);
     }// end of construct.
 
     function form($instance)

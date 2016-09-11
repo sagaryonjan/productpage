@@ -259,18 +259,6 @@ function productpage_customize_register( $wp_customize ) {
 			'priority' 	   => 4,
 	));
 
-	$wp_customize->add_setting( 'productpage_detail_button', array(
-			'default'                =>  'Detail',
-			'capability'             =>  'edit_theme_options',
-			'sanitize_callback'	     =>  'productpage_sanitize_text'
-	) );
-	$wp_customize->add_control( 'productpage_detail_button', array(
-			'type' 				     =>  'text',
-			'label'                  =>  esc_html__('Type to change  button text.', 'productpage'),
-			'settings' 			     =>  'productpage_detail_button',
-			'section'                =>  'productpage_product_banner_section',
-	) );
-
 	$wp_customize->add_setting( 'productpage_buy_now_button', array(
 			'default'                =>  'BuY Now',
 			'capability'             =>  'edit_theme_options',
