@@ -40,7 +40,7 @@ if (!function_exists('productpage_front_banner')) :
                                 <?php endif; ?>
                                 <a href="<?php the_permalink(); ?>"><h2><?php the_title(); ?></h2></a>
                                 <div class="ts-dtl">
-                                    <p><?php the_excerpt(); ?></p>
+                                    <?php the_excerpt(); ?>
                                 </div>
 
                                 <div class="ts-button">

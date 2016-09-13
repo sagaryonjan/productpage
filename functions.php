@@ -116,8 +116,6 @@ function productpage_scripts() {
 
 	wp_enqueue_script( 'jquery-stellar-min', get_template_directory_uri() . '/js/jquery.stellar.min.js', array( 'jquery' ) );
 
-	wp_enqueue_script( 'jquery', get_template_directory_uri() . '/js/jquery-2.2.3.js', array( 'jquery' ) );
-
 	wp_enqueue_script( 'swiper', get_template_directory_uri() . '/js/swiper.js', array( 'jquery' ) );
 
 	//Register main.js

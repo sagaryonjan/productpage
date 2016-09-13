@@ -13,7 +13,7 @@ $sidebar_layout = get_post_meta( $post->ID, 'productpage_page_specific_layout', 
 ?>
 	<div class="ts-breadcrumb-banner">
 
-		<div data-stellar-background-ratio="0.5" class="ts-parallax-image" style="background-image: url(<?php echo esc_url(get_theme_mod('productpage_post_background_image'));?>);  background-size:cover; background-position: center center;">
+		<div data-stellar-background-ratio="0.5" class="ts-parallax-image" style="background-image: url(<?php echo esc_url(get_theme_mod('productpage_post_background_image'));?>);  background-size:cover; background-repeat: no-repeat;">
 			<div class="ts-container">
 
 				<div id="productpage--breadcrumbs">

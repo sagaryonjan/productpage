@@ -1,6 +1,6 @@
 /*
 Theme Name: ProductPage
-Theme URI: http://underscores.me/
+Theme URI: http://themespade.com/productpage
 Author: themespade
 Author URI: http://themespade.com
 Description: A Product Landing Page WordPress Theme
@@ -8,7 +8,7 @@ Version: 1.0.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: productpage
-Tags:
+Tags: two-columns,one-column, grid-layout, right-sidebar, custom-background, custom-colors, custom-header, custom-menu, featured-images, full-width-template,footer-widgets,theme-options, translation-ready,e-commerce,blog,portfolio, threaded-comments
 
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
@@ -1153,13 +1153,13 @@ header.site-header {
     -moz-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out; 
-    box-shadow: 0 0 3px 0 #ccc;
+    transition: all 0.5s ease-in-out;  
+    box-shadow: 0 0 3px 0 #111;
 }
 
 .ts-sticky .ts-menu-icon i {
-	color: #000;
-	border: 1px solid #000; 
+	color: #fff;
+	border: 1px solid #fff; 
 }
 
 .ts-sticky .ts-menu-icon i:hover {
@@ -1170,19 +1170,26 @@ header.site-header {
 .ts-logo {
     float: left;
     line-height: 20px;
+    padding-right: 18px;
+}
+
+.ts-site-title {
+    float: left;
+    line-height: 22px;
+}
+
+h1.site-title {
+    font-size: 18px;
+    margin: 0;
 }
 
 p.site-description {
-    font-size: 12px;
-    color: #fff;
-}
-
-.site-header.ts-sticky p.site-description { 
-    color: #555;
+    font-size: 12px; 
 }
 
 .site-header.ts-sticky { 
     padding: 8px 0;
+    background: #000;
 }
 
 .site-header.ts-fixed {
@@ -1222,19 +1229,20 @@ p.site-description {
 	color: #fff;
 	font-style: italic;
 	font-weight: 300;
+	margin-bottom: 28px;
 }
 
 .ts-slider .ts-desc h2 {
 	font-size: 60px;
 	color: #05b2dc;
-	padding: 40px 0;
+	margin-bottom: 28px;
 }
 
 .ts-slider .ts-desc p {
 	font-size: 14px;
 	color: #fff; 
-	line-height: 30px;
-	max-width: 300px;
+	line-height: 38px;
+	max-width: 400px;
 	margin-bottom: 30px;
 }
 
@@ -1348,6 +1356,11 @@ p.site-description {
 	color: #fff;
 	margin-right: 14px;
 }
+
+/*.ts-button span.active a:before {
+    content: 'sa';
+    padding-right: 10px;
+}*/
 
 .ts-button span a:hover {
 	border: 1px solid #05b2dc; 
@@ -1607,7 +1620,7 @@ p.site-description {
 
 .ts-info .ts-info-desc {
 	float: right;
-	width: 50%;
+	width: 46%;
 	position: relative;
 	z-index: 999;
 }
@@ -1618,16 +1631,16 @@ p.site-description {
 
 .ts-info2 .ts-info-desc {
 	float: left;
-	width: 50%;
+	width: 46%;
 	position: relative;
 	z-index: 999;
 }
 
-.ts-info-desc p {
+.ts-info .ts-info-desc p {
 	padding: 30px 0 8px;
 	line-height: 30px;
 	font-size: 14px;
-	line-height: 30px;
+	line-height: 38px;
 	color: #fff;
 	font-weight: 300;  
 } 
@@ -1656,7 +1669,7 @@ p.site-description {
 	font-size: 14px; 
 	display: inline-block;
 	border: 1px solid #fff; 
-	margin-top: 18px;
+	margin-top: 20px;
 	padding: 12px 24px;
 }
 
@@ -1700,6 +1713,7 @@ p.site-description {
 
 .ts-info2 .ts-info-desc p { 
 	color: #fff;   
+	line-height: 38px;
 }
 
 @import 'https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600';
@@ -1790,6 +1804,10 @@ figure.ts-review-img {
 	padding: 90px 0;
 	background: #eee;
 }  
+
+.faqs-list {
+    margin-top: 40px;
+}
 
 .ts-faqs p {
     font-size: 14px;
@@ -1942,6 +1960,10 @@ table#wp-calendar {
     margin: 0;
 } 
 
+.ts-bottom-footer span {
+	color: #05b2dc;
+}
+
 /*=====  End of Footer  ======*/
 
 
@@ -2034,6 +2056,10 @@ body.left-sidebar #primary {
 	background: rgba(000,000,000,0.3);
 	top: 0;
 	left: 0;
+}
+
+.ts-breadcrumb-banner .ts-parallax-image {
+	background: #555;
 }
 
 .ts-default-title {
@@ -2410,6 +2436,17 @@ h1.page-title {
 
 /*=====  End of Error 404  ======*/
 
+/*===================================
+=            Search Page            =
+===================================*/
+.search .entry-summary {
+	margin: 0;
+}
+
+
+/*=====  End of Search Page  ======*/
+
+
 
 /*=============================================
 =            Default Widgets            =
@@ -2422,6 +2459,7 @@ input.search-field {
     width: 100%;
     font-size: 14px;
     padding: 8px;
+    border-radius: 0;
 }
 
 h2.widget-title {
@@ -2639,6 +2677,11 @@ span.ts-bottom:after {
     padding-right: 6px;
 }
 
+.woocommerce #content div.product div.thumbnails a, .woocommerce div.product div.thumbnails a, .woocommerce-page #content div.product div.thumbnails a, .woocommerce-page div.product div.thumbnails a {
+    float: left;
+    width: 46.2%;
+}
+
 .woocommerce span.onsale {
 	background: #05b2dc;
 	width: 50px;
@@ -2699,6 +2742,7 @@ ins span.woocommerce-Price-amount.amount {
 .woocommerce .quantity .qty { 
     border-radius: 0; 
     font-size: 12px;
+    padding: 8px;
 }
 
 .woocommerce div.product form.cart .button {
@@ -2725,8 +2769,8 @@ ins span.woocommerce-Price-amount.amount {
 }
 
 .product .page-content, .entry-content, .entry-summary p {
-    line-height: 26px;
-    font-size: 13px;
+    line-height: 32px;
+    font-size: 14px;
     color: #333;
     padding: 12px 0 18px;
 }
@@ -2779,7 +2823,11 @@ span.sku {
 	border-radius: 0;
 	background: #888;
 	color: #fff;
-	font-weight: 400;
+	font-weight: 400;	
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
 }
 
 .woocommerce #respond input#submit:hover, .woocommerce a.button:hover, .woocommerce button.button:hover, .woocommerce input.button:hover {
@@ -2833,8 +2881,8 @@ span.cart-value {
 }
 
 .ts-sticky .ts-cart-icon a i {
-    color: #000;
-    border: 1px solid #000;
+    color: #fff;
+    border: 1px solid #fff;
 }
 
 .woocommerce-cart .entry-header h1 {
@@ -2875,6 +2923,8 @@ table tr th {
 
 .woocommerce #content table.cart td.actions .input-text, .woocommerce table.cart td.actions .input-text, .woocommerce-page #content table.cart td.actions .input-text, .woocommerce-page table.cart td.actions .input-text {
     width: 120px;
+    height: 31px;
+    margin-top: 2px;
 }
 
 #add_payment_method table.cart td.actions .coupon .input-text, .woocommerce-cart table.cart td.actions .coupon .input-text, .woocommerce-checkout table.cart td.actions .coupon .input-text {
@@ -2967,6 +3017,51 @@ a.checkout-button.button.alt.wc-forward {
 	font-size: 16px;
 	font-weight: 500;
 	padding: 8px 0;
+}
+
+.woocommerce-info {
+	border-top: 0;
+}
+
+.woocommerce-info:before {
+    color: #05b2dc;
+}
+
+form.checkout.woocommerce-checkout input {
+    border-radius: 0;
+    padding: 6px;
+    font-size: 14px;
+}
+
+form.checkout.woocommerce-checkout textarea {
+    border-radius: 0;
+    padding: 6px;
+    font-size: 14px;
+}
+
+.woocommerce form.checkout_coupon, .woocommerce form.login, .woocommerce form.register { 
+    border-radius: 0;
+}
+
+form.checkout_coupon input {
+    border-radius: 0;
+    padding: 6px;
+    font-size: 14px;
+}
+
+.login input {
+    border-radius: 0;
+    padding: 6px;
+    font-size: 14px;
+}
+
+.woocommerce form .form-row label.inline {
+    display: block;
+    padding-top: 14px;
+}
+
+.woocommerce #payment #place_order, .woocommerce-page #payment #place_order {
+	padding: 10px 14px;
 }
 
 /*=====  End of Woo-Commerce  ======*/
