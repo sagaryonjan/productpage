@@ -212,3 +212,8 @@ require get_template_directory() . '/inc/productpage-widget.php';
  * Custome metabox.
  */
 require get_template_directory() . '/inc/admin/meta-boxes.php';
+
+/**
+ * Load Custom Plugin Suggestion
+ */
+require get_template_directory() . '/inc/class-tgm-plugin-activation.php';

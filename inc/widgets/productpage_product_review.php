@@ -159,7 +159,7 @@ class Productpage_Product_Review extends WP_Widget
                             while ($ts_get_page->have_posts()) : $ts_get_page->the_post(); ?>
                                 <div class="swiper-slide">
                                     <div class="ts-reviews-single">
-                                        <p><?php the_excerpt(); ?></p>
+                                       <?php the_excerpt(); ?>
 
                                     <?php if(has_post_thumbnail() ) : ?>
                                         <figure class="ts-review-img">
