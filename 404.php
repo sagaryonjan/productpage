@@ -11,7 +11,7 @@ get_header(); ?>
     <div class="ts-breadcrumb-banner">
 
         <div data-stellar-background-ratio="0.5" class="ts-parallax-image"
-             style="background-image: url(<?php echo esc_url(get_theme_mod('productpage_default_background_image')); ?>);  background-size:cover; background-position: center center;">
+             style="background-image: url(<?php echo esc_url(get_theme_mod('productpage_default_background_image')); ?>);  background-size:cover; background-repeat: no-repeat;">
             <div class="ts-container">
 
                 <div id="productpage--breadcrumbs">
@@ -31,7 +31,6 @@ get_header(); ?>
         <div class="ts-container">
 
                 <main id="main" class="site-main" role="main">
-
                     <section class="error-404 not-found">
                         <header class="page-header">
                             <h1 class="page-title"><?php esc_html_e('Page Not Found', 'productpage'); ?></h1>
@@ -44,8 +43,8 @@ get_header(); ?>
 
                         </div><!-- .page-content -->
                     </section><!-- .error-404 -->
-
                 </main><!-- #main -->
+
         </div>
     </div>
 

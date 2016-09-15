@@ -142,7 +142,9 @@ function productpage_customize_register( $wp_customize ) {
         'title'				  => esc_html__( 'Header', 'productpage' ),
 	) );
 
-	$wp_customize->get_section( 'title_tagline'  )->panel		= 'productpage_header_option';
+	$wp_customize->get_section( 'title_tagline'  )->panel  = 'productpage_header_option';
+
+    $wp_customize->get_section( 'header_image' )->panel  = 'productpage_header_option';
 
 	// logo and site title position options
 	$wp_customize->add_setting( 'productpage_header_logo_placement', array(
@@ -352,6 +354,12 @@ function productpage_customize_register( $wp_customize ) {
 		'priority' 		 	   =>  35,
 		'title' 		 	   =>  esc_html__( 'Accessories', 'productpage' )
 	) );
+
+    $wp_customize->get_section( 'colors' )->panel  =  'productpage_accessories_option';
+
+    $wp_customize->get_section( 'background_image'  )->panel  = 'productpage_accessories_option';
+
+    $wp_customize->get_section( 'static_front_page' )->panel  = 'productpage_accessories_option';
 
 	$wp_customize->add_section( 'productpage_accessories_custom_coder_section', array(
 		'priority'          	 =>  5,

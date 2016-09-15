@@ -12,26 +12,19 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: 404.php:17
+#: 404.php:18
 #@ _s
-msgid "Oops! That page can&rsquo;t be found."
+msgid "404 Error."
 msgstr ""
 
-#: 404.php:21
+#: 404.php:36
 #@ _s
-msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
+msgid "Page Not Found"
 msgstr ""
 
-#: 404.php:33
+#: 404.php:40
 #@ _s
-msgid "Most Used Categories"
-msgstr ""
-
-#. translators: %1$s: smiley
-#: 404.php:51
-#, php-format
-#@ _s
-msgid "Try looking in the monthly archives. %1$s"
+msgid "It looks like you may have a wrong turn. Don't worry... it happens to the best of us."
 msgstr ""
 
 #: comments.php:31
